@@ -1,0 +1,46 @@
+@import '../../../assets/scss/vars';
+
+.root {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .tab {
+    cursor: pointer;
+    position: relative;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 0 5px;
+    color: $colorGray-400;
+
+    &.active {
+      color: $colorPrimary300;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        height: 3px;
+        width: 100%;
+        background-color: $colorPrimary300;
+        transition: left 0.25s;
+        left: 0;
+      }
+    }
+  }
+
+  &.dark {
+    .tab {
+      color: $colorGray-350;
+
+      &.active {
+        color: $darkBlue300;
+
+        &::after {
+          background-color: $darkBlue300;
+        }
+      }
+    }
+  }
+}

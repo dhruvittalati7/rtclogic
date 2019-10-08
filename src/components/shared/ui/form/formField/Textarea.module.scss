@@ -1,0 +1,22 @@
+@import '../../../../../assets/scss/vars';
+@import '../../../../../assets/scss/common';
+
+.root {
+  @extend .AbstractInput;
+  @extend .subtle-scrollbar;
+
+  display: block;
+  min-height: 100px;
+  padding: 15px 10px;
+  width: 100%;
+  line-height: 1.4;
+  background: #fff;
+  color: $colorGray-300;
+  border: none;
+  resize: vertical;
+
+  &.dark {
+    background: $darkBlack100;
+    color: #fff;
+  }
+}

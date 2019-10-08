@@ -1,0 +1,26 @@
+@import '../../../../../assets/scss/vars';
+
+.root {
+  max-width: 600px;
+  float: right;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  padding: 5px 10px;
+  border-radius: 10px;
+  color: $colorPrimary700;
+
+  &.highlight {
+    background-color: #eeebcf;
+  }
+
+  &.clickable {
+    cursor: pointer;
+  }
+
+  &.dark {
+    &.highlight {
+      background-color: $darkBlack300;
+    }
+  }
+}

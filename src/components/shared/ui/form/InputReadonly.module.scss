@@ -1,0 +1,39 @@
+@import '../../../../assets/scss/vars';
+@import '../../../../assets/scss/common';
+
+.root {
+  @extend .AbstractInput;
+
+  display: flex;
+  align-items: center;
+  background: #fff;
+
+  .selected {
+    border-color: $colorPrimary500;
+  }
+
+  .input {
+    display: block;
+    width: 100%;
+    background: transparent;
+    padding: 0 20px 0 0;
+    border: none;
+
+    .pseudoInput {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      height: 100%;
+
+      span {
+        color: #000;
+      }
+    }
+  }
+
+  .pencilIcon {
+    color: $colorPrimary500;
+    cursor: pointer;
+  }
+}

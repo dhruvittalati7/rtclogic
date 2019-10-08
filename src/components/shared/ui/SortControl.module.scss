@@ -1,0 +1,46 @@
+@import '../../../assets/scss/vars';
+
+.sortBy {
+  cursor: pointer;
+  padding-right: 18px;
+  position: relative;
+
+  &::before,
+  &::after {
+    border: 4px solid transparent;
+    content: '';
+    display: block;
+    height: 0;
+    right: 5px;
+    top: 50%;
+    position: absolute;
+    width: 0;
+  }
+
+  &::before {
+    border-bottom-color: $colorPrimary100;
+    margin-top: -9px;
+  }
+
+  &::after {
+    border-top-color: $colorPrimary100;
+    margin-top: 1px;
+  }
+
+  &.asc,
+  &.desc {
+    color: $darkBlue300;
+  }
+
+  &.asc {
+    &::before {
+      border-bottom-color: $darkBlue300;
+    }
+  }
+
+  &.desc {
+    &::after {
+      border-top-color: $darkBlue300;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+@import '../../../assets/scss/vars';
+
+.root {
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid $colorPrimary750;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 10px;
+
+  &.dark {
+    background: $darkBlack100;
+    border-bottom: 1px solid $darkBorder300;
+  }
+}

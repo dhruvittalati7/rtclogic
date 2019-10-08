@@ -1,0 +1,30 @@
+@import '../../../../../assets/scss/vars';
+@import '../../../../../assets/scss/common';
+
+.root {
+  @extend .subtle-scrollbar;
+
+  flex: 1 1 auto;
+  width: 100%;
+  height: calc(100% - 20px);
+  position: relative;
+  overflow-y: auto;
+  border: none;
+  font-size: 14px;
+  margin: 10px 0 10px 22px;
+  letter-spacing: 0.56px;
+  background: transparent;
+  resize: none;
+
+  &::placeholder {
+    color: $colorGray-450;
+  }
+
+  &.dark {
+    color: #fff;
+
+    &::placeholder {
+      color: $colorGray-300;
+    }
+  }
+}

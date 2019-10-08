@@ -1,0 +1,76 @@
+# tibxfrontsms
+
+## Project uses typescript
+https://www.typescriptlang.org/
+
+## Project config
+`src/config/settings.local.ts`
+
+## How to start project locally
+1. Install all npm dependencies from package.json
+
+    [VS Code](https://stackoverflow.com/questions/35563802/running-npm-command-within-visual-studio-code)
+
+    [WebStorm](https://www.jetbrains.com/help/webstorm/installing-and-removing-external-software-using-node-package-manager.html)
+    
+    Terminal
+    ```bash
+    npm install
+    ```
+    
+2. Use 'start' script from package.json this will start local sever on port 3000
+
+    [VS Code](https://code.visualstudio.com/docs/editor/tasks)
+    
+    [WebStorm](https://www.jetbrains.com/help/webstorm/installing-and-removing-external-software-using-node-package-manager.html#ws_npm_running_npm_scripts)
+    
+    Terminal
+    ```bash
+    npm run start
+    ```
+
+### Compiles and hot-reloads for development
+```
+npm run start
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Run your tests
+```
+npm run test
+```
+
+### Lints and fixes files
+```
+npm run lint:ts:fix
+npm run lint:css:fix
+npm run prettier
+```
+
+### Analyze chunks
+Install webpack-bundle-analyzer before using this 
+```
+npm run analyzer
+```
+
+### Structure
+1. src - project source
+2. src/assets - project resources (global css, fonts, images)
+3. src/classes - project business logic
+4. src/models - frontend objects for representing business entities
+5. src/services - classes for actions on models and other business logic
+6. src/components - project react components (view)
+7. src/components/shared - project specific components. Can be reused between components
+8. src/config - project configs
+9. src/store - project redux
+
+### Test users
+
+```
+login: tirade1
+password: testpass
+```

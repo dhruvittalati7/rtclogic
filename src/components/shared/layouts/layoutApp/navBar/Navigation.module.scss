@@ -1,0 +1,98 @@
+@import '../../../../../assets/scss/vars';
+
+.root {
+  margin-top: 110px;
+
+  .item {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    width: 64px;
+    height: 64px;
+
+    @include media-1024 {
+      padding-left: 8px;
+    }
+
+    .icon {
+      position: relative;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 35px;
+      height: 50px;
+      overflow: hidden;
+      color: $colorGray-600;
+      transition: all 0.2s;
+
+      .badge {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background-color: #fff;
+        left: 3px;
+        top: 12px;
+
+        span {
+          font-size: 10px;
+          font-weight: 600;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #000;
+        }
+      }
+    }
+
+    &.active,
+    &:hover {
+      width: 64px;
+      height: 64px;
+      border-radius: 5px;
+      box-shadow: 0 10px 25px 0 rgba(38, 44, 70, 0.15);
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
+
+      .icon {
+        color: $colorRed;
+      }
+    }
+  }
+
+  .item + .item {
+    margin-top: 15px;
+  }
+
+  &.dark {
+    .item {
+      .icon {
+        color: $colorGray-350;
+
+        .badge {
+          background-color: $darkBlack100;
+
+          span {
+            color: #fff;
+          }
+        }
+      }
+
+      &.active,
+      &:hover {
+        box-shadow: none;
+        background: $darkBlack200;
+
+        .icon {
+          color: $darkBlue300;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+---
+container_name: prometheus
+prometheus_version: latest
+prometheus_retention_default: 10y

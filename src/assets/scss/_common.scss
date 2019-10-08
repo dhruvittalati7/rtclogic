@@ -1,0 +1,273 @@
+@import './vars';
+
+body {
+  margin: 0;
+  padding: 0;
+  background: $darkBlack100;
+  font-family: $fontApp, sans-serif;
+  font-size: 16px;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.subtle-scrollbar {
+  &::-webkit-scrollbar-track {
+    background-color: $darkBlack200;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $darkBlack200;
+    border-radius: 3px;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: $darkBlack400;
+    }
+  }
+}
+
+.link {
+  color: #fff;
+
+  &.blue {
+    color: $darkBlue300;
+  }
+}
+
+.buttonLink {
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  text-decoration: none;
+}
+
+.ReactModal {
+  &__Body--open,
+  &__Html--open {
+    overflow: hidden;
+  }
+
+  &__Overlay {
+    opacity: 0;
+    z-index: 1300;
+    transition: opacity 200ms ease-in-out;
+
+    &--after-open {
+      opacity: 1;
+    }
+
+    &--before-close {
+      opacity: 0;
+    }
+  }
+
+  &__Content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    max-width: 98%;
+    padding: 0;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    background: #181c27;
+    border-radius: 5px;
+    transform: translate(-50%, -20%);
+    opacity: 0;
+    transition: all 200ms ease-in-out;
+
+    &--after-open {
+      transform: translate(-50%, -50%);
+      opacity: 1;
+    }
+
+    &--before-close {
+      transform: translate(-50%, -20%);
+      opacity: 0;
+    }
+
+    &__Inner {
+      @extend .subtle-scrollbar;
+
+      max-height: calc(100vh - 32px);
+      overflow-y: auto;
+    }
+  }
+}
+
+.AbstractPopupForm {
+  padding: 40px;
+
+  @include media-640 {
+    padding: 20px;
+  }
+}
+
+.AbstractInput {
+  height: 45px;
+  border: 1px solid $colorPrimary700;
+  border-radius: 5px;
+  line-height: 1;
+  padding: 0 10px;
+  font-size: 13px;
+
+  &::placeholder {
+    color: rgba(61, 75, 102, 0.7);
+  }
+}
+
+.AbstractPopupFormField {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 40px;
+}
+
+.MiniKeyboard {
+  .simple-keyboard.hg-theme-default {
+    padding: 5px 0;
+
+    & .hg-row {
+      &:not(:last-child) {
+        margin-bottom: 2px;
+      }
+
+      & .hg-button {
+        height: 25px;
+        border-radius: 3px;
+        font-size: 12px;
+
+        &:not(:last-child) {
+          margin-right: 2px;
+        }
+      }
+    }
+  }
+}
+
+.Notifications {
+  &.Notifications {
+    top: 100px;
+  }
+
+  .Toastify__toast {
+    border-radius: 4px;
+
+    &.Toastify__toast--default {
+      background: $darkBlue300;
+    }
+
+    &.Toastify__toast--success {
+      background: $darkGreen300;
+    }
+
+    &.Toastify__toast--error {
+      background: $colorRed;
+    }
+
+    .Toastify__toast-body {
+      margin: auto 10px;
+      font-size: 12px;
+      color: #fff;
+    }
+
+    .Toastify__close-button {
+      color: #fff;
+      font-weight: normal;
+    }
+
+    .Toastify__progress-bar {
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+.Tooltip {
+  &.Tooltip {
+    background: $darkBlack400;
+    opacity: 0;
+    color: #fff;
+    transition: opacity 0.3s;
+
+    &.show {
+      opacity: 1;
+    }
+
+    &.place-right {
+      &::after {
+        border-right-color: $darkBlack400;
+        border-right-style: solid;
+        border-right-width: 6px;
+      }
+    }
+
+    &.place-left {
+      &::after {
+        border-left-color: $darkBlack400;
+        border-left-style: solid;
+        border-left-width: 6px;
+      }
+    }
+
+    &.place-top {
+      &::after {
+        border-top-color: $darkBlack400;
+        border-top-style: solid;
+        border-top-width: 6px;
+      }
+    }
+
+    &.place-bottom {
+      &::after {
+        border-bottom-color: $darkBlack400;
+        border-bottom-style: solid;
+        border-bottom-width: 6px;
+      }
+    }
+  }
+}
+
+.audioSlider {
+  .rc-slider-track {
+    background: #fff;
+  }
+
+  .rc-slider-rail {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .rc-slider-handle {
+    position: absolute;
+    margin-left: -4px;
+    margin-top: -4px;
+    width: 12px;
+    height: 12px;
+    cursor: grab;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    background: #579ad5;
+    opacity: 0;
+
+    &:focus {
+      border-color: transparent;
+      box-shadow: none;
+    }
+  }
+}

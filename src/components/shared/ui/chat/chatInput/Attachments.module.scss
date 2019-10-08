@@ -1,0 +1,15 @@
+@import "../../../../../assets/scss/vars";
+
+.root {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-top: 1px solid $darkBorder300;
+  background: $darkBlack230;
+
+  .title {
+    color: #fff;
+    margin-right: 15px;
+    font-size: 11px;
+  }
+}

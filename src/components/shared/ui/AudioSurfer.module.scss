@@ -1,0 +1,66 @@
+@import "../../../assets/scss/vars";
+
+.root {
+  .inner {
+    display: flex;
+    align-items: center;
+
+    .actionButton {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: #fff;
+      margin-right: 16px;
+      transition: all 0.1s;
+
+      .iconPlay {
+        width: 20px;
+        height: 20px;
+        transform: translateX(1px);
+      }
+
+      .iconStop {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    .right {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+
+      .player {
+        width: 200px;
+        display: flex;
+      }
+
+      .time {
+        margin-top: 3px;
+        width: 80px;
+      }
+    }
+  }
+
+  .loading {
+    width: 200px;
+    font-style: italic;
+  }
+
+  &.dark {
+    .inner {
+      .actionButton {
+        color: #fff;
+        background: $darkBlack300;
+
+        &:hover {
+          background: $darkBlack400;
+        }
+      }
+    }
+  }
+}

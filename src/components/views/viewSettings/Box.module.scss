@@ -1,0 +1,10 @@
+@import '../../../assets/scss/vars';
+
+.root {
+  width: 450px;
+  height: auto;
+  background: $darkBlack250;
+  border-radius: 10px;
+  box-shadow: 0 5px 40px 0 rgba(7, 9, 13, 0.15);
+  padding: 40px;
+}

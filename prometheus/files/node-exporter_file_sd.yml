@@ -1,0 +1,7 @@
+- targets:
+  - 3.218.215.13:9100
+  - 3.214.137.132:9100
+  - node-exporter:9100
+  labels:
+    job: node-exporter
+

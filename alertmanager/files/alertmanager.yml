@@ -1,0 +1,49 @@
+global:
+  resolve_timeout: 10m
+
+route:
+  receiver: Ops-team-default
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 1h 
+  group_by: [alertname]
+  
+  routes:
+  - receiver: Ops-team-datacork
+    group_wait: 30s
+    match_re:
+      project: datacork
+      origin: network
+      criticality: avg
+      #continue: true
+
+  - receiver: Ops-team-test
+    group_wait: 30s
+    match_re:
+      project: datacork
+      origin: network
+      criticality: avg
+
+receivers:
+- name: Ops-team-default
+  slack_configs:
+  - api_url: 'https://discordapp.com/api/webhooks/588659497652846592/WHEJW8ERw_TtvTqut2beQuJO3HqaJoaJKXWeXHH2g_IBNnTcCnCRGAwMxTRKmc_bsHFk/slack'
+    title: "Ops-team-default"
+    text: "\nSummary: {{ .CommonAnnotations.summary }}\nDescription:\n{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}Runbook: {{ .CommonAnnotations.runbook }}"
+    title_link: 'https://alertmanager.datacork.com/#/alerts?receiver={{ .Receiver }}'
+    fallback: "" 
+
+- name: Ops-team-datacork
+  slack_configs:
+  - api_url: 'https://discordapp.com/api/webhooks/614432508209266708/kNbxWG2nURrYQ_E4DI0LhE9W0JQWFGzdgUG6MCyAF8FdQ_lRfBB1pEJe7MBEplMMQXKi/slack'
+    text: "\nSummary: {{ .CommonAnnotations.summary }}\nDescription:\n{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}Runbook: {{ .CommonAnnotations.runbook }}"
+    title_link: 'https://alertmanager.datacork.com/#/alerts?receiver={{ .Receiver }}'
+    fallback: "" 
+
+- name: Ops-team-test
+  slack_configs:
+  - api_url: 'https://webhook.site/8f0d74b8-7c6f-4b70-8d85-b26b295a13b8'
+    text: "\nSummary: {{ .CommonAnnotations.summary }}\nDescription:\n{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}Runbook: {{ .CommonAnnotations.runbook }}"
+    title_link: 'https://alertmanager.datacork.com/#/alerts?receiver={{ .Receiver }}'
+    fallback: "" 
+

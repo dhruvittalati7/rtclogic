@@ -1,0 +1,55 @@
+---
+- name: Install requirements, python-pip
+  apt:
+    name:
+      - python-pip
+      - python3-pip
+    state: latest
+    force_apt_get: True
+
+- name: Install handler requirements
+  pip:
+    name: psutil
+
+- name: Create prometheus user
+  user:
+    name: prometheus
+    shell: '/bin/false'
+    password: '!'
+    password_lock: True
+
+- name: Create container volume
+  file:
+    path: "{{ container_volume }}"
+    state: directory
+    owner: prometheus
+    group: prometheus
+    mode: '0755'
+
+- name: Copy prometheus configs
+  copy:
+    src: "{{ item }}"
+    dest: "{{ container_volume }}"
+    owner: prometheus
+    group: prometheus
+    mode: '600'
+  with_fileglob: "*"
+  notify:
+    - Reload prometheus
+
+- name: Get prometheus's uid and gid
+  getent:
+    database: passwd
+    key: prometheus
+
+- name: Set facts uid and gid
+  set_fact:
+    uid: "{{ getent_passwd['prometheus'][1] }}"
+    gid: "{{ getent_passwd['prometheus'][2] }}"
+
+- name: Copy prometheus docker compose file
+  template:
+    src: "{{ container_name }}.j2"
+    dest: "{{ container_yml }}"
+    mode: '0600'
+

@@ -1,0 +1,66 @@
+@import '../../../../../assets/scss/vars';
+
+.icon {
+  cursor: pointer;
+  flex: 0 0 auto;
+  width: 60px;
+  border: none;
+  fill: $colorPrimary300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+
+  &.send {
+    position: relative;
+
+    .round {
+      position: absolute;
+      height: 56px;
+      width: 56px;
+      border-radius: 50%;
+      background-color: $colorRed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      fill: #fff;
+      box-shadow: 0 5px 25px 0 rgba(80, 105, 230, 0.3);
+      transition: all 0.2s;
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    &.send {
+      .round {
+        background-color: #eee;
+      }
+    }
+  }
+
+  &.dark {
+    background: transparent;
+    fill: $darkBlue300;
+
+    &.send {
+      .round {
+        box-shadow: none;
+        background-color: $darkGreen300;
+
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+
+    &.disabled {
+      &.send {
+        .round {
+          background-color: $darkBlack300;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}

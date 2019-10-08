@@ -1,0 +1,127 @@
+@import '../../../../assets/scss/vars';
+
+.root {
+  width: 200px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px 0 rgba(38, 44, 70, 0.25);
+  margin-bottom: 10px;
+
+  .header {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 20px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+
+    .title {
+      width: 100%;
+      font-size: 10px;
+      letter-spacing: 0.8px;
+      color: #000;
+    }
+
+    .control {
+      flex: 0 0 auto;
+      cursor: pointer;
+      color: $colorPrimary500;
+    }
+  }
+
+  .content {
+    display: flex;
+    background: $colorPrimary900;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    .image {
+      margin: 19px 0;
+    }
+
+    .name {
+      font-size: 14px;
+      letter-spacing: 0.84px;
+      font-weight: 600;
+    }
+
+    .wave {
+      height: 50px;
+      width: 100%;
+      color: $colorPrimary500;
+      display: flex;
+      justify-content: center;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+
+      .button {
+        flex: 0 0 auto;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: all 0.2s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.call {
+          width: 36px;
+          height: 36px;
+          background-color: $colorPrimary500;
+          color: #fff;
+        }
+
+        &.decline {
+          width: 36px;
+          height: 36px;
+          background-color: $colorRed;
+          color: #fff;
+        }
+      }
+
+      .button + .button {
+        margin-left: 15px;
+      }
+    }
+  }
+
+  &.dark {
+    box-shadow: none;
+
+    .header {
+      background: $darkBlack280;
+
+      .title {
+        color: #fff;
+      }
+    }
+
+    .content {
+      background: $darkBlack250;
+
+      .name {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.minimized {
+  cursor: pointer;
+  width: 68px;
+  height: 68px;
+
+  .shadow {
+    box-shadow: 0 2px 3px 0 rgba(38, 44, 70, 0.25);
+  }
+
+  &.dark {
+    border: 4px solid $darkBlue300;
+    border-radius: 50%;
+  }
+}

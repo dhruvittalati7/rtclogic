@@ -1,0 +1,28 @@
+@import '../../../assets/scss/vars';
+
+.root {
+  flex: 0 0 auto;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  background-color: $colorPrimary900;
+  color: $colorGray-300;
+
+  &:hover {
+    color: $colorRed;
+  }
+
+  &.dark {
+    background-color: $darkBlack200;
+    color: #fff;
+
+    &:hover {
+      background-color: $darkBlue300;
+    }
+  }
+}

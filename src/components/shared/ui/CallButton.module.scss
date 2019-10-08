@@ -1,0 +1,40 @@
+@import '../../../assets/scss/vars';
+
+.root {
+  flex: 0 0 auto;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  box-shadow: 0 5px 15px 0 rgba(38, 44, 70, 0.25);
+  background-color: #fff;
+  color: $colorRed;
+
+  &.buttonDisabled {
+    cursor: not-allowed;
+    color: #ccc;
+    background: #eee;
+    box-shadow: unset;
+  }
+
+  &.dark {
+    width: 46px;
+    height: 46px;
+    box-shadow: none;
+    background: $darkGreen300;
+    color: #fff;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &.buttonDisabled {
+      color: #ccc;
+      background: $darkBlack280;
+    }
+  }
+}

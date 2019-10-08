@@ -1,0 +1,17 @@
+@import '../../../../assets/scss/vars';
+
+.root {
+  width: 100%;
+  height: 100%;
+  padding: 0 30px;
+  overflow: auto;
+
+  .country {
+    display: flex;
+    align-items: center;
+
+    .flag {
+      font-size: 20px;
+    }
+  }
+}

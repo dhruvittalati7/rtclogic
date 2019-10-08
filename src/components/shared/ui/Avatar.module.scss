@@ -1,0 +1,113 @@
+@import '../../../assets/scss/vars';
+
+.root {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: $colorPrimary750;
+  color: #fff;
+
+  &.system {
+    background: transparent !important;
+    color: $colorLogo !important;
+    border-radius: 0;
+  }
+
+  & img {
+    height: 100%;
+    border-radius: 50%;
+  }
+
+  .statusBadge {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+
+  .badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+    left: 0;
+    bottom: 0;
+
+    &.star {
+      top: 0;
+      width: 12px;
+      height: 12px;
+      background-color: $darkBlack100;
+    }
+
+    & > span::before {
+      position: absolute;
+      top: 0;
+      left: 2px;
+      content: '\2605';
+      color: #ffae00;
+      font-size: 8px;
+    }
+
+    .btn {
+      @include btnLink();
+    }
+  }
+
+  &.profile {
+    width: 46px;
+    height: 46px;
+  }
+
+  &.list {
+    width: 30px;
+    height: 30px;
+  }
+
+  &.message {
+    width: 30px;
+    height: 30px;
+  }
+
+  &.callingMinimized {
+    width: 60px;
+    height: 60px;
+  }
+
+  &.calling {
+    width: 82px;
+    height: 82px;
+  }
+
+  &.pending {
+    opacity: 0.5;
+  }
+
+  &.dark {
+    &.profile {
+      background-color: $darkBlack200;
+      color: #fff;
+    }
+
+    &.message {
+      background-color: $darkBlack300;
+      color: #fff;
+    }
+
+    &.calling {
+      border: 2px solid $darkBlack100;
+      background-color: $darkBlack200;
+      color: #fff;
+    }
+
+    &.callingMinimized {
+      background-color: $darkBlack300;
+      color: #fff;
+    }
+  }
+}

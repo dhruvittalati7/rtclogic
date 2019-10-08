@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  prometheus:
+    image: prom/prometheus:{{ prometheus_version }}
+    container_name: {{ container_name }}
+    ports:
+      - "9090:9090"
+    volumes:
+      - {{ container_volume }}:/prometheus
+    command:
+      - '--config.file=/prometheus/prometheus.yml'
+#     - --storage.tsdb.retention.time {{ prometheus_retention_default }}
+    user: "{{ uid }}:{{ gid }}"
+    networks:
+      - monitoring-network
+    restart: always
+
+networks:
+  monitoring-network:
+    driver: bridge
+    name: monitoring-network

@@ -1,0 +1,71 @@
+@import "../../../assets/scss/vars";
+
+.root {
+  .player {
+    opacity: 0;
+  }
+
+  .inner {
+    display: flex;
+    align-items: center;
+
+    .actionButton {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 0 0 0 8px;
+      color: #fff;
+      margin-right: 16px;
+      transition: all 0.1s;
+
+      .iconPlay {
+        width: 14px;
+        height: 14px;
+        transform: translateX(1px);
+      }
+
+      .iconStop {
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+    .right {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      font-size: 10px;
+      padding: 0 16px 0 0;
+
+      .time {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 3px;
+      }
+    }
+  }
+
+  .loading {
+    width: 200px;
+    font-size: 12px;
+    font-style: italic;
+  }
+
+  &.dark {
+    .inner {
+      .actionButton {
+        color: #fff;
+        background: $darkBlack300;
+
+        &:hover {
+          background: $darkBlack400;
+        }
+      }
+    }
+  }
+}

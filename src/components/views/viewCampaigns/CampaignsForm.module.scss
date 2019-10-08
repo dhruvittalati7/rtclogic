@@ -1,0 +1,33 @@
+@import '../../../assets/scss/vars';
+@import '../../../assets/scss/common';
+
+.root {
+  max-height: 100%;
+  overflow-y: auto;
+
+  .form {
+    @extend .AbstractPopupForm;
+
+    max-width: 1000px;
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+
+      & > * {
+        flex: 0 0 auto;
+        width: calc((100% - 30px) / 2);
+      }
+    }
+  }
+
+  @media all and (max-width: 1200px) {
+    .row {
+      flex-wrap: wrap;
+
+      & > * {
+        width: 100%;
+      }
+    }
+  }
+}

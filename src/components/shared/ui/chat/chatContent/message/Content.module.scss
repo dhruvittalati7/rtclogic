@@ -1,0 +1,42 @@
+@import '../../../../../../assets/scss/vars';
+
+.root {
+  font-size: 12px;
+  padding: 14px 25px;
+  border-radius: 0 8px 8px 8px;
+  background-color: $darkGreen300;
+  color: $colorGray-900;
+
+  &.emojiFew {
+    font-size: 30px;
+    line-height: 1;
+
+    & > span {
+      display: inline-block;
+      transform: translateY(2px);
+    }
+  }
+
+  &.emojiOne {
+    font-size: 50px;
+    line-height: 1;
+
+    & > span {
+      transform: translateY(5px);
+    }
+  }
+
+  &.in {
+    background-color: $darkBlack250;
+  }
+
+  &.out {
+    &.blue {
+      background-color: $darkBlue300;
+    }
+  }
+
+  .link {
+    color: #fff;
+  }
+}

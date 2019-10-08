@@ -1,0 +1,16 @@
+.root {
+  .inner {
+    display: flex;
+    align-items: center;
+
+    .code {
+      flex: 0 0 auto;
+      width: 120px;
+      margin-right: 8px;
+    }
+
+    .phone {
+      flex: 1 1 auto;
+    }
+  }
+}

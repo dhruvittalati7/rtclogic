@@ -1,12 +1,16 @@
 version: "3.7"
 services:
   nginx:
-    image: registry.rtclogic.com:1443/common/nginx:{{ nginx_version }}
+    image: {{ datacork_registry }}/nginx-prometheus:{{ nginx_version }}
     container_name: {{ container_name }}
-    volumes:
-    - {{ container_volume }}:/etc/nginx
     ports:
-      - 443:443
-      - 80:80
+      - "80:80"
+      - "443:443"
+    networks:
+      - monitoring-network
     restart: always
 
+networks:
+  monitoring-network:
+    driver: bridge
+    name: monitoring-network

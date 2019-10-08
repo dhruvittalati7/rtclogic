@@ -1,0 +1,115 @@
+@import '../../../../assets/scss/vars';
+
+.root {
+  position: relative;
+  cursor: pointer;
+  font-size: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+
+  .mark {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: $colorRed;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+  }
+
+  .main {
+    padding: 20px;
+
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 14px;
+
+      .titleRight {
+        font-size: 12px;
+        font-style: italic;
+      }
+    }
+
+    .content {
+      font-size: 12px;
+    }
+  }
+
+  .bottom {
+    margin-top: -10px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-style: italic;
+    padding-left: 20px;
+
+    .spacer {
+      flex: 1 1 auto;
+      width: 100%;
+    }
+  }
+
+  & + & {
+    margin-top: 16px;
+  }
+
+  &.dark {
+    background: $darkBlack100;
+    transition: all 0.2s;
+
+    .main {
+      .title {
+        color: $colorGray-900;
+
+        .titleRight {
+          color: $colorGray-350;
+        }
+      }
+
+      .content {
+        color: $colorGray-350;
+      }
+    }
+
+    .bottom {
+      color: $colorGray-900;
+      background: $darkBlack230;
+      transition: all 0.2s;
+    }
+
+    &.active {
+      background: $darkGreen300;
+
+      .main {
+        .title {
+          color: #fff;
+
+          .titleRight {
+            color: #fff;
+          }
+        }
+
+        .content {
+          color: #fff;
+        }
+      }
+
+      .bottom {
+        color: #fff;
+        background: $darkGreen200;
+      }
+
+      &.blue {
+        background: $darkBlue300;
+
+        .bottom {
+          background: $darkBlue200;
+        }
+      }
+    }
+  }
+}

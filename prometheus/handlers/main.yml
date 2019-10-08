@@ -1,0 +1,3 @@
+---
+- name: Reload prometheus
+  include: reload_prometheus.yml

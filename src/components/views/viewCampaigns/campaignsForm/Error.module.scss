@@ -1,0 +1,15 @@
+@import "../../../../assets/scss/vars";
+
+.root {
+  height: 50px;
+  border-radius: 4px;
+  background: $colorRed;
+  color: #fff;
+  font-size: 12px;
+  margin: 24px 0;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
+}

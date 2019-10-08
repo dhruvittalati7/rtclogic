@@ -1,0 +1,4 @@
+---
+container_name: grafana
+grafana_version: latest
+

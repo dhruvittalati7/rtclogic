@@ -1,3 +1,4 @@
 ---
 container_name: nginx
 nginx_version: latest
+config_path: "{{ container_volume }}/conf.d"

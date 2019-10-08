@@ -1,0 +1,115 @@
+@import '../../assets/scss/vars';
+
+.root {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: stretch;
+
+  .main {
+    position: relative;
+    flex: 0 0 auto;
+    width: 45%;
+    min-width: 600px;
+    background-color: #fff;
+    color: #000;
+    padding: 61px 71px 10px 71px;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      transition: all 0.5s;
+      color: $colorRed;
+      margin: 10px 0;
+
+      span {
+        font-family: $fontBold;
+        margin-left: 12px;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 2.17px;
+      }
+    }
+
+    @include media-1200 {
+      width: 100%;
+    }
+
+    .formArea {
+      position: absolute;
+      top: 50%;
+      left: 70px;
+      right: 50px;
+      transform: translateY(-50%);
+
+      @media all and (max-height: 900px) {
+        transform: translateY(calc(-50% + 40px));
+      }
+    }
+
+    .title {
+      font-family: $fontSemiBold;
+      font-size: 30px;
+      letter-spacing: 1.2px;
+      margin-bottom: 55px;
+    }
+
+    .link {
+      font-weight: 500;
+      text-decoration: none;
+      color: #fff;
+      opacity: 0.9;
+    }
+  }
+
+  .brand {
+    position: relative;
+    width: 55%;
+    background-color: $colorPrimary100;
+    overflow: hidden;
+    background-image: url('../../assets/img/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+
+    .bg {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-image: url('../../assets/img/bg.svg');
+      background-position: -228px -326px;
+    }
+  }
+
+  .isMember {
+    cursor: pointer;
+    position: absolute;
+    bottom: 21px;
+    right: 31px;
+    color: $colorPrimary300;
+    font-size: 14px;
+    letter-spacing: 0.84px;
+    border-bottom: 1px solid $colorPrimary300;
+  }
+
+  &.dark {
+    .main {
+      background: $darkBlack100;
+
+      .title {
+        color: #fff;
+      }
+
+      .logo {
+        color: $darkGreen300;
+      }
+    }
+  }
+}

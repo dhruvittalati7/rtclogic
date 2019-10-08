@@ -1,0 +1,55 @@
+@import '../../../../assets/scss/vars';
+
+.root {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-style: normal;
+  line-height: 1;
+  height: 22px;
+  padding: 0 14px;
+  margin-right: 4px;
+  border-radius: 3px 3px 7px 3px;
+
+  &.dark {
+    color: $colorGray-900;
+    transition: all 0.2s;
+
+    &.default {
+      background: $darkBlack200;
+    }
+
+    &.gray {
+      background: $darkBlack300;
+    }
+
+    &.orange {
+      background: $darkOrange300;
+    }
+
+    &.blue {
+      background: $darkBlue300;
+    }
+
+    &.green {
+      background: $darkGreen300;
+    }
+
+    &.red {
+      background: $colorRed;
+    }
+
+    &.active {
+      &.a-green {
+        background: $darkGreen100;
+      }
+
+      &.a-blue {
+        background: $darkBlue200;
+      }
+    }
+  }
+}

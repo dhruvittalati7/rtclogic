@@ -1,0 +1,72 @@
+@import '../../../../../assets/scss/vars';
+
+.root {
+  border: 15px solid $darkBlack250;
+  width: 115px;
+  height: 115px;
+  border-radius: 50%;
+  position: absolute;
+  top: -50px;
+  left: calc(50% - 50px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $colorGray-500;
+
+  .avatar {
+    position: relative;
+    cursor: pointer;
+    height: 90px;
+    width: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .delete {
+      position: absolute;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      padding: 0;
+      border: none;
+      cursor: pointer;
+      right: 0;
+      top: 0;
+      font-weight: 100;
+      color: #999;
+      transition: all 0.3s ease-in-out;
+
+      &::after {
+        transform: translateY(-2px);
+        display: block;
+        content: '\00D7';
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &:hover,
+      &:focus {
+        color: #fff;
+        transform: rotate(180deg) scale(1.2);
+      }
+
+      &:active {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      @media (min-width: 768px) {
+        width: 10px;
+        height: 10px;
+      }
+    }
+
+    & img {
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+}

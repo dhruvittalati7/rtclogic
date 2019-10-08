@@ -1,0 +1,17 @@
+@import "../../../assets/scss/vars";
+
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .badge {
+    margin-left: 5px;
+    background: $darkBlack250;
+    color: $colorGray-900;
+    border-radius: 3px;
+    padding: 3px 4px 3px 4px;
+    font-size: 9px;
+    line-height: 1;
+  }
+}

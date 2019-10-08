@@ -1,0 +1,12 @@
+@import '../../../../assets/scss/vars';
+
+.root {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1.28px;
+  margin-bottom: 16px;
+
+  &.dark {
+    color: $colorGray-500;
+  }
+}

@@ -1,0 +1,82 @@
+@import '../../../assets/scss/vars';
+@import '../../../assets/scss/common';
+
+.root {
+  .icon {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+    align-self: stretch;
+    width: 70px;
+    padding: 0;
+    color: $colorPrimary300;
+
+    .delete {
+      color: $colorGray-400;
+
+      &:hover {
+        color: $colorGray-300;
+      }
+    }
+  }
+
+  .searchBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 315px;
+
+    .inputBlock {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      background: #fff;
+
+      .input {
+        @extend .AbstractInput;
+
+        display: block;
+        width: 100%;
+        background: transparent;
+        border: none;
+        font-size: 13px;
+      }
+    }
+  }
+
+  &.dark {
+    .icon {
+      color: $darkBlue300;
+
+      .delete {
+        color: $darkBlue300;
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+
+    .searchBlock {
+      .inputBlock {
+        background: $darkBlack100;
+
+        .input {
+          display: block;
+          width: 100%;
+          background: transparent;
+          border: none;
+          color: #fff;
+
+          &::placeholder {
+            color: $colorGray-350;
+          }
+        }
+      }
+    }
+  }
+}

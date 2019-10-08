@@ -1,0 +1,32 @@
+@import "../../../../assets/scss/vars";
+
+.root {
+  position: fixed;
+  height: 70px;
+  width: 100%;
+  bottom: 0;
+  background: $darkBlack250;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+
+  .text {
+    font-size: 13px;
+    letter-spacing: 1.04px;
+    line-height: 1;
+    color: #fff;
+    margin: 0 20px;
+  }
+
+  .btn {
+    height: 40px;
+
+    &.clear {
+      background-color: $colorGray-400;
+    }
+  }
+
+  .btn + .btn {
+    margin-left: 15px;
+  }
+}

@@ -1,0 +1,56 @@
+@import '../../../../assets/scss/vars';
+
+.root {
+  position: relative;
+
+  .textarea {
+    padding-right: 45px;
+
+    &[disabled],
+    &[readonly] {
+      padding-right: 10px;
+      color: $colorGray-450;
+    }
+  }
+
+  .emoji {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: -40px;
+    right: -40px;
+    padding: 0 40px 20px 40px;
+    background-color: $darkBlack200;
+    z-index: 2;
+  }
+
+  .keyboard {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: -40px;
+    right: -40px;
+    padding: 0 40px 20px 40px;
+    background-color: $darkBlack200;
+    z-index: 1;
+  }
+
+  .actions {
+    position: absolute;
+    right: 8px;
+    bottom: 30px;
+    width: 30px;
+    height: 53px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &.dark {
+    .textarea {
+      &[disabled],
+      &[readonly] {
+        color: $colorGray-350;
+      }
+    }
+  }
+}

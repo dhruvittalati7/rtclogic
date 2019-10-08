@@ -1,0 +1,64 @@
+groups:
+- name: Datacork rules
+  rules:
+
+  - alert: GetEmptyNodeListFromBackend
+    expr: datacork_backend_returned_null{} == 1
+    for: 1h
+    labels:
+      project: datacork
+      origin: network
+      criticality: avg
+    annotations:
+      summary: Get empty node list from backend
+      description: 'Datacork continuous test get empty node list from backend or cannot connect to backend on {{ $labels.platform }}'
+      runbook: not ready yet
+
+  - alert: UnableConnectToNode
+    expr: datacork_test_basic_entrypoint_labels{connected="0"}
+    for: 1h
+    labels:
+      project: datacork
+      origin: network
+      criticality: avg
+    annotations:
+      summary: Unable connect to node
+      description: 'Datacork continuous test cannot connect to node {{ $labels.id }} on {{ $labels.platform }}'
+      runbook: not ready yet
+
+  - alert: UnableSwitchExitPointOnBackend
+    expr: datacork_test_basic_endpoint_labels{switched="0"}
+    for: 1h
+    labels:
+      project: datacork
+      origin: network
+      criticality: avg
+    annotations:
+      summary: Unable switch exitpoint on backend side
+      description: 'Datacork continuous test when connected to entrypoint {{ $labels.id }} cannot switch exitpoint to {{ $labels.endpoint_id }} on backend side on {{ $labels.platform }}'
+      runbook: not ready yet
+
+  - alert: UnableSwitchExitPointPractically
+    expr: datacork_test_basic_endpoint_labels{ip_confirmed="0"}
+    for: 1h
+    labels:
+      project: datacork
+      origin: network
+      criticality: avg
+    annotations:
+      summary: Unable switch exitpoint practically
+      description: 'Datacork continuous test when connected to entrypoint {{ $labels.id }} cannot switch exitpoint to {{ $labels.endpoint_id }} practically (by external IP test) on {{ $labels.platform }}'
+      runbook: not ready yet
+
+  - alert: AlexaAvailabilityTestLowValue 
+    expr: datacork_test_long_alexa{status="200"} < 80
+    for: 1h
+    labels:
+      project: datacork
+      origin: network
+      criticality: avg
+    annotations:
+      summary: Alexa availability test value lower then 80
+      # foobar = '{{ printf `node_filesystem_avail{instance="%s", mountpoint="/"}` $labels.instance | query | first }} / {{ printf `node_filesystem_size{instance="%s", mountpoint="/"}` $labels.instance | query | first }}'
+      description: 'Datacork continuous test get low alexa test value on node {{ $labels.id }} on {{ $labels.platform }}'
+      runbook: not ready yet

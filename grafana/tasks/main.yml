@@ -1,0 +1,32 @@
+---
+- name: Create Grafana user
+  user:
+    name: grafana
+    shell: '/bin/false'
+    password: '!'
+    password_lock: True
+
+- name: Create container volume
+  file:
+    path: "{{ container_volume }}"
+    state: directory
+    owner: grafana 
+    group: grafana
+    mode: '0755'
+
+- name: Get grafana's uid and gid
+  getent:
+    database: passwd
+    key: grafana 
+
+- name: Set facts uid and gid
+  set_fact:
+    uid: "{{ getent_passwd['grafana'][1] }}"
+    gid: "{{ getent_passwd['grafana'][2] }}"
+
+- name: Copy grafana docker compose file
+  template:
+    src: "{{ container_name }}.j2"
+    dest: "{{ container_yml }}"
+    mode: '0600'
+

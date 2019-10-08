@@ -1,0 +1,81 @@
+@import '../../../assets/scss/vars';
+@import '../../../assets/scss/common';
+
+.root {
+  margin: 0 -5px -5px 0;
+
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &.hasMore {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  &.showAll {
+    .list {
+      @extend .subtle-scrollbar;
+
+      overflow-y: auto;
+      max-height: 300px;
+    }
+  }
+
+  .item {
+    flex: 0 0 auto;
+    font-size: 10px;
+    background-color: $darkGreen300;
+    margin: 0 5px 5px 0;
+    padding: 0 10px;
+    border-radius: 3px;
+    line-height: 1;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+
+    &.notValid {
+      background-color: $colorRed;
+    }
+
+    &.isDisabled {
+      background-color: $colorGray-400;
+    }
+
+    .label {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .remove {
+      flex: 0 0 auto;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+  }
+
+  .btn {
+    @include btnLink();
+  }
+
+  .more,
+  .total {
+    position: absolute;
+    bottom: -16px;
+    left: 0;
+    font-size: 12px;
+  }
+
+  .more {
+    text-decoration: none;
+    color: $darkBlue300;
+  }
+
+  .total {
+    color: $colorGray-400;
+  }
+}

@@ -1,0 +1,26 @@
+@import '../../../../../../assets/scss/vars';
+@import '../../../../../../assets/scss/common';
+
+.root {
+  @extend .AbstractInput;
+
+  display: block;
+  width: 100%;
+  background: #fff;
+  color: $colorGray-300;
+  border: none;
+
+  &[readonly] {
+    color: $colorGray-450;
+  }
+
+  &.dark {
+    background: $darkBlack100;
+    color: #fff;
+
+    &[readonly] {
+      cursor: default;
+      color: $colorGray-350;
+    }
+  }
+}

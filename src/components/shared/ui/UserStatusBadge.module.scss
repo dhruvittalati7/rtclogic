@@ -1,0 +1,25 @@
+@import '../../../assets/scss/vars';
+
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #fff;
+
+  .dot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6px;
+    height: 6px;
+    background-color: $colorRed;
+    border-radius: 50%;
+  }
+
+  .btn {
+    @include btnLink();
+  }
+}

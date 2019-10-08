@@ -1,0 +1,30 @@
+@import '../../../assets/scss/vars';
+
+.root {
+  cursor: pointer;
+  border-radius: 3px;
+  background: $colorPrimary500;
+  display: flex;
+  color: #fff;
+  font-size: 13px;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 1.04px;
+  line-height: 1;
+  padding: 10px 30px;
+  border: none;
+  transition: all 0.2s;
+
+  &.buttonDisabled {
+    cursor: not-allowed;
+    background: $colorPrimary750;
+  }
+
+  &.dark {
+    background: $darkGreen300;
+
+    &.buttonDisabled {
+      background: $colorGray-600;
+    }
+  }
+}

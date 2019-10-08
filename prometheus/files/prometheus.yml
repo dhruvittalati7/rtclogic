@@ -1,0 +1,33 @@
+global:
+  scrape_interval:     1m
+  evaluation_interval: 50s
+
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - alertmanager:9093
+
+rule_files:
+  - alerts_rule.yml
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+    - targets: ['localhost:9090']
+
+  - job_name: node-exporter
+    file_sd_configs:
+    - files:
+      - node-exporter_file_sd.yml
+    metric_relabel_configs:
+    - source_labels: [platform]
+      regex: '^demo$'
+      replacement: 'prod'
+      target_label: platform
+
+      #  - job_name: cadvisor
+      #file_sd_configs:
+      #- files:
+      #- cadvisor_file_sd.yml
+

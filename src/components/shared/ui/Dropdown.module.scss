@@ -1,0 +1,44 @@
+@import '../../../assets/scss/vars';
+@import '../../../assets/scss/common';
+
+.root {
+  @extend .subtle-scrollbar;
+
+  z-index: 1;
+  position: absolute;
+  top: calc(100% - 16px);
+  border-radius: 4px;
+  left: 0;
+  width: 100%;
+  padding: 5px 0;
+  background: #fff;
+  overflow-y: auto;
+
+  .item {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 12px;
+    line-height: 1;
+    height: 20px;
+
+    &.active {
+      background: $darkBlue300;
+      color: #fff;
+    }
+  }
+
+  &.dark {
+    background: $darkBlack50;
+
+    .item {
+      color: $colorGray-350;
+
+      &.active {
+        background: $darkBlack300;
+        color: #fff;
+      }
+    }
+  }
+}

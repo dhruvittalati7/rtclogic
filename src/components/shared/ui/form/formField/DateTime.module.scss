@@ -1,0 +1,39 @@
+.root {
+  .textInput {
+    &.textInput {
+      cursor: pointer;
+
+      &.readonly {
+        cursor: default;
+      }
+    }
+  }
+
+  .pickerWrapper {
+    position: relative;
+    overflow: hidden;
+    height: 0;
+    transition: all 0.3s;
+
+    .pickerBlock {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 280px;
+      opacity: 0;
+      transition: all 0.3s;
+    }
+
+    &.visible {
+      height: 280px;
+
+      .pickerBlock {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.dark {
+  }
+}

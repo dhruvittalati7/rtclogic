@@ -1,0 +1,60 @@
+@import "../../../assets/scss/vars";
+
+.root {
+  position: relative;
+
+  .field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 1;
+    border-radius: 2px;
+    padding: 6px 8px;
+
+    .placeholder {
+      opacity: 0.5;
+    }
+
+    .icon {
+      opacity: 0;
+      transition: all 0.2s;
+
+      &.open {
+        transform: rotate(180deg);
+      }
+    }
+
+    &.clickable {
+      background: $darkBlack220;
+      cursor: pointer;
+
+      .icon {
+        opacity: 1;
+      }
+    }
+  }
+
+  .dropdown {
+    z-index: 1;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 100%;
+    border-radius: 2px;
+    padding: 3px 0;
+    background: $darkBlack400;
+
+    .item {
+      cursor: pointer;
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+      height: 20px;
+      padding: 0 8px;
+
+      &:hover {
+        background: $darkBlue300;
+      }
+    }
+  }
+}

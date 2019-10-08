@@ -1,0 +1,31 @@
+@import "../../../assets/scss/vars";
+
+.root {
+  position: relative;
+  display: inline-flex;
+  background: $darkBlack100;
+  border-radius: 5px;
+
+  .item {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    padding: 0 20px;
+    color: #fff;
+    font-size: 12px;
+  }
+
+  .selector {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 50%;
+    height: 24px;
+    background: $darkBlue300;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+  }
+}

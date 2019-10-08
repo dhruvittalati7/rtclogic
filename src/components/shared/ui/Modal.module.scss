@@ -1,0 +1,65 @@
+@import '../../../assets/scss/vars';
+
+.root {
+  &:focus {
+    outline: none;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  flex: 0 0 auto;
+  min-width: 0;
+  width: 100%;
+}
+
+.close {
+  position: absolute;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  right: -50px;
+  top: -20px;
+  font-weight: 100;
+  color: #999;
+  transition: all 0.3s ease-in-out;
+
+  &::after {
+    transform: translateY(-2px);
+    display: block;
+    content: '\00D7';
+    font-family: Tahoma, sans-serif;
+    line-height: 1;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    transform: rotate(180deg) scale(1.2);
+  }
+
+  &:active {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  @media (min-width: 768px) {
+    width: 60px;
+    height: 60px;
+  }
+}

@@ -1,0 +1,48 @@
+@import '../../../../assets/scss/vars';
+
+.root {
+  display: flex;
+  align-items: center;
+  height: 90px;
+  cursor: pointer;
+  justify-content: space-between;
+
+  .secondFontColor {
+    opacity: 0.5;
+    color: $colorGray-400;
+  }
+
+  &.active {
+    background: $darkGreen300;
+
+    .secondFontColor {
+      color: #fff;
+    }
+  }
+
+  .toggle {
+    margin-left: 25px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      font-family: $fontApp;
+      font-size: 14px;
+      line-height: 2.33;
+      letter-spacing: 0.5px;
+      color: #fff;
+    }
+
+    .subtitle {
+      @extend .secondFontColor;
+
+      font-size: 12px;
+      font-family: $fontApp;
+      line-height: 1.58;
+      letter-spacing: 0.2px;
+    }
+  }
+}

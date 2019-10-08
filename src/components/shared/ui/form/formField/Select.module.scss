@@ -1,0 +1,36 @@
+@import '../../../../../assets/scss/vars';
+@import '../../../../../assets/scss/common';
+
+.root {
+  .input {
+    @extend .AbstractInput;
+
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: #fff;
+    color: $colorGray-300;
+    border: none;
+
+    .placeholder {
+      color: $colorGray-450;
+    }
+
+    .arrow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      color: $colorGray-450;
+    }
+  }
+
+  &.dark {
+    .input {
+      background: $darkBlack100;
+      color: #fff;
+    }
+  }
+}

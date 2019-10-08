@@ -1,0 +1,63 @@
+@import '../../../assets/scss/vars';
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+
+  .th {
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.8px;
+    text-align: left;
+
+    & > div {
+      display: flex;
+    }
+
+    &:last-child {
+      padding-right: 20px;
+
+      & > div {
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  .td {
+    color: #fff;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.83;
+    letter-spacing: 0.7px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .tbody tr {
+    height: 50px;
+    background-color: $darkBlack100;
+  }
+
+  .tbody tr td:first-child {
+    padding-left: 20px;
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+  }
+
+  .tbody tr td:last-child {
+    padding-right: 20px;
+    text-align: right;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+  }
+}

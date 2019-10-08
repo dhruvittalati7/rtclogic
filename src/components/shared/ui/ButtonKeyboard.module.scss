@@ -1,0 +1,18 @@
+@import '../../../assets/scss/vars';
+
+.root {
+  cursor: pointer;
+  flex: 0 0 auto;
+  width: 60px;
+  border: none;
+  fill: $colorPrimary300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+
+  &.dark {
+    background: transparent;
+    fill: $darkBlue300;
+  }
+}

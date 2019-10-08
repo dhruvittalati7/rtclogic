@@ -1,0 +1,53 @@
+---
+- name: Install requirements, python-pip
+  apt:
+    name:
+      - python-pip
+      - python3-pip
+    state: latest
+    force_apt_get: True
+
+- name: Install handler requirements
+  pip:
+    name: psutil 
+
+- name: Create prometheus user
+  user:
+    name: alertmanager 
+    shell: '/bin/false'
+    password: '!'
+    password_lock: True
+
+- name: Create container volume
+  file:
+    path: "{{ container_volume }}"
+    state: directory
+    owner: alertmanager 
+    group: alertmanager
+    mode: '0755'
+
+- name: Copy alertmanager configs
+  copy:
+    src: "{{ item }}"
+    dest: "{{ container_volume }}"
+    owner: alertmanager
+    group: alertmanager
+    mode: '600'
+  with_fileglob: "*"
+
+- name: Get alertmanager's uid and gid
+  getent:
+    database: passwd
+    key: alertmanager
+
+- name: Set facts uid and gid
+  set_fact:
+    uid: "{{ getent_passwd['alertmanager'][1] }}"
+    gid: "{{ getent_passwd['alertmanager'][2] }}"
+
+- name: Copy alertmanager docker compose file
+  template:
+    src: "alertmanager.j2"
+    dest: "{{ container_yml }}"
+    mode: '0600'
+

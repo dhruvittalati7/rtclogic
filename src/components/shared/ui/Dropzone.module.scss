@@ -1,0 +1,19 @@
+@import '../../../assets/scss/vars';
+
+.root {
+  cursor: pointer;
+  height: 45px;
+  border-radius: 5px;
+  line-height: 1;
+  padding: 0 10px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.dark {
+    background: $darkBlack100;
+    border: 1px dashed $darkBlue300;
+    color: $darkBlue300;
+  }
+}

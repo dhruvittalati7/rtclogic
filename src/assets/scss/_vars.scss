@@ -1,0 +1,101 @@
+$colorLogo: #42913d;
+$colorPrimary100: #3d4b66;
+$colorPrimary300: #2d43b3;
+$colorPrimary500: #5069e6;
+$colorPrimary700: #e6eafa;
+$colorPrimary750: #e4e7ef;
+
+$colorPrimary900: #f0f0f2;
+
+$colorGray-300: #595959;
+$colorGray-350: #7d8086;
+$colorGray-400: #999;
+$colorGray-450: #bfbfbf;
+$colorGray-500: #ececec;
+$colorGray-600: #bcbcbc;
+$colorGray-900: #f8f8f8;
+
+$colorRed: #ea2121;
+
+$darkBlack50: #090912;
+$darkBlack100: #0f141e;
+$darkBlack200: #181c27;
+$darkBlack220: #19202e;
+$darkBlack230: #222631;
+$darkBlack250: #292d39;
+$darkBlack280: #313540;
+$darkBlack300: #3f445e;
+$darkBlack400: #5c6180;
+$darkBlack500: #7a80a0;
+$darkGreen100: #2a552a;
+$darkGreen200: #347034;
+$darkGreen300: #42913d;
+$darkBlue200: #4d73a5;
+$darkBlue300: #579ad5;
+$darkOrange300: #ea7b1f;
+$darkBorder300: rgba(255, 255, 255, 0.15);
+
+$online: #42913d;
+$dnd: #cbc80e;
+$away: #ea2121;
+
+$fontApp: 'Main', sans-serif;
+$fontBold: 'Main-Bold', sans-serif;
+$fontSemiBold: 'Main-SemiBold', sans-serif;
+
+@mixin media-320() {
+  @media all and (max-width: 320px) {
+    @content;
+  }
+}
+
+@mixin media-480() {
+  @media all and (max-width: 480px) {
+    @content;
+  }
+}
+
+@mixin media-640() {
+  @media all and (max-width: 640px) {
+    @content;
+  }
+}
+
+@mixin media-768() {
+  @media all and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin media-960() {
+  @media all and (max-width: 960px) {
+    @content;
+  }
+}
+
+@mixin media-1024() {
+  @media all and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin media-1200() {
+  @media all and (max-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin media-1440() {
+  @media all and (max-width: 1440px) {
+    @content;
+  }
+}
+
+@mixin btnLink {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}

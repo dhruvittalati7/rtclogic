@@ -1,0 +1,25 @@
+@import '../../../../assets/scss/vars';
+
+.root {
+  width: 100%;
+  height: 100%;
+  padding: 0 30px;
+  overflow: auto;
+
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .actionPencil {
+      color: $darkBlue300;
+      cursor: pointer;
+      margin-right: 15px;
+    }
+
+    .actionRemove {
+      color: $colorRed;
+      cursor: pointer;
+    }
+  }
+}

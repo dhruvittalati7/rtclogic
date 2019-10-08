@@ -1,0 +1,18 @@
+@import "../../../assets/scss/vars";
+@import './Common.module';
+
+.rememberMe {
+  margin-top: 24px;
+  font-size: 14px;
+  color: $colorGray-600;
+
+  .rememberBlock {
+    background: #fff;
+
+    .rememberTick {
+      color: $darkGreen300;
+      width: 16px;
+      height: 16px;
+    }
+  }
+}

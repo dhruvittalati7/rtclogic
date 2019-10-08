@@ -1,0 +1,26 @@
+@import "../../../../assets/scss/vars";
+
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: $darkBlue300;
+  color: #fff;
+  font-size: 12px;
+  transition: all 0.5s;
+  transform: translateY(-100%);
+
+  &.show {
+    transform: translateY(0);
+  }
+
+  .link {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}

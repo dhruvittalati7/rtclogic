@@ -1,0 +1,44 @@
+@import '../../../../../../../assets/scss/vars';
+
+.root {
+  background-color: $darkGreen300;
+  border-radius: 0 3px 3px 3px;
+  margin-bottom: 10px;
+  overflow: hidden;
+
+  &.in {
+    background-color: $darkBlack250;
+  }
+
+  .name {
+    cursor: pointer;
+    font-size: 11px;
+    line-height: 1;
+    margin: 8px 24px;
+
+    .icon {
+      display: inline-block;
+      margin-left: 5px;
+      width: 10px;
+      height: 10px;
+      transition: all 0.5s;
+
+      &.open {
+        transform: rotate(90deg) translateX(1px);
+      }
+    }
+  }
+
+  .image {
+    max-width: 100%;
+    display: none;
+
+    &.open {
+      display: block;
+    }
+  }
+
+  .loader {
+    margin: 20px 0;
+  }
+}

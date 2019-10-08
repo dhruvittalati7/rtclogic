@@ -1,0 +1,10 @@
+---
+- name: Get prometheus PID
+  pids:
+    name: prometheus
+  register: pids_of_prometheus
+
+- name: Reload prometheus
+  command: kill -HUP {{ item }}
+  ignore_errors: True
+  with_items: "{{ pids_of_prometheus.pids }}"

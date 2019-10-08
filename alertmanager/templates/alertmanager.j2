@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  alertmanager:
+    image: prom/alertmanager:{{ alertmanager_version }}
+    container_name: {{ container_name }}
+    ports:
+      - "9093:9093"
+    volumes:
+      - {{ container_volume }}:/alertmanager
+    command:
+      - '--config.file=/alertmanager/alertmanager.yml'
+    user: "{{ uid }}:{{ gid }}" 
+    networks:
+      - monitoring-network
+    restart: always
+
+networks:
+  monitoring-network:
+    driver: bridge
+    name: monitoring-network
+

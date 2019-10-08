@@ -1,0 +1,26 @@
+@import '../../../assets/scss/vars';
+
+.root {
+  font-size: 12px;
+  color: $colorGray-350;
+  white-space: nowrap;
+
+  .space {
+    display: inline-block;
+    width: 10px;
+  }
+
+  span {
+    margin-left: 3px;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  &.limitError {
+    color: $colorRed;
+
+    span {
+      color: $colorRed;
+    }
+  }
+}

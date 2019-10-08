@@ -1,0 +1,123 @@
+@import '../../../assets/scss/vars';
+
+$padding-right-part: 70px;
+$width-btn-sign-in: 340px;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 8px;
+  position: relative;
+
+  .field {
+    width: 100%;
+  }
+
+  .field + .field {
+    margin-top: 24px;
+  }
+
+  .button {
+    $transtale: $width-btn-sign-in / 2 + $padding-right-part;
+    $bottom: $padding-right-part + 170px;
+
+    margin-top: 40px;
+    width: $width-btn-sign-in;
+    height: 120px;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0;
+    color: white;
+    background-color: transparent;
+    border: none;
+    position: relative;
+    left: -300px;
+    transition: all 0.5s;
+
+    @include media-1200 {
+      height: 60px;
+      left: 0;
+      justify-content: flex-end;
+    }
+
+    .buttonTitle {
+      width: 50%;
+      height: inherit;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $colorRed;
+      box-sizing: border-box;
+      font-size: 16px;
+      font-family: $fontSemiBold;
+      cursor: pointer;
+
+      @include media-1200 {
+        display: none;
+      }
+    }
+
+    .buttonArrow {
+      cursor: pointer;
+      width: 28%;
+      height: inherit;
+      background-color: $colorPrimary900;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $colorRed;
+
+      &:hover {
+        background-color: $colorGray-500;
+      }
+    }
+
+    &[disabled] {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    @include media-768 {
+      width: 100%;
+      left: 0;
+    }
+
+    @include media-480 {
+      font-size: 12px;
+    }
+  }
+
+  .error {
+    position: absolute;
+    top: calc(100% + 20px);
+    font-size: 18px;
+    color: #fff;
+    padding: 5px 15px;
+    background: $colorRed;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    left: 30px;
+    opacity: 0;
+    transition: all 0.2s;
+
+    &.errorActive {
+      left: 0;
+      opacity: 1;
+    }
+  }
+
+  &.dark {
+    .button {
+      .buttonTitle {
+        background: $darkGreen300;
+        color: #fff;
+      }
+
+      .buttonArrow {
+        color: $darkBlue300;
+      }
+    }
+  }
+}

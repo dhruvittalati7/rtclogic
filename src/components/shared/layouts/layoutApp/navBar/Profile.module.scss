@@ -1,0 +1,129 @@
+@import '../../../../../assets/scss/vars';
+
+.root {
+  flex: 0 0 auto;
+  margin: 0 20px 18px 20px;
+  display: flex;
+  justify-content: center;
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .avatar {
+    position: relative;
+
+    .status {
+      opacity: 0;
+      transition: all 400ms linear;
+      position: absolute;
+      visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      min-width: 120px;
+      bottom: 0;
+      left: 50px;
+      z-index: 1;
+      box-shadow: 0 5px 25px 0 rgba(7, 9, 13, 0.35);
+      background-color: $darkBlack200;
+
+      .displayName {
+        background-color: rgba(255, 255, 255, 0.2);
+
+        .statusBadge {
+          margin: 0 7px;
+        }
+      }
+
+      & > div {
+        white-space: nowrap;
+        font-size: 13px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: 1.04px;
+        display: flex;
+        align-items: center;
+        height: 35px;
+        color: #fff;
+
+        &:first-child {
+          border-top-left-radius: 7px;
+          border-top-right-radius: 7px;
+        }
+
+        &:last-child {
+          border-bottom-left-radius: 7px;
+          border-bottom-right-radius: 7px;
+        }
+      }
+
+      & > div:not(:first-child) {
+        cursor: pointer;
+        padding: 0 50px 0 24px;
+
+        &.active {
+          background-color: $darkGreen300;
+        }
+
+        &:not(.active):hover {
+          background-color: $darkGreen200;
+        }
+      }
+    }
+
+    &:hover .status {
+      visibility: visible;
+      opacity: 1;
+      transition: all 400ms linear;
+    }
+  }
+
+  .block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logout {
+    margin-top: 16px;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 10px 40px 0 rgba(38, 44, 70, 0.25);
+    background-color: #fff;
+    border-radius: 50%;
+    transition: all 0.3s;
+  }
+
+  .logoutIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    color: $colorRed;
+    transition: all 0.3s;
+  }
+
+  &.dark {
+    .logoutIcon {
+      color: $colorRed;
+    }
+
+    .logout {
+      box-shadow: none;
+      background-color: $darkBlack280;
+
+      &:hover {
+        background-color: $darkBlack300;
+
+        .logoutIcon {
+          color: #fff;
+        }
+      }
+    }
+  }
+}

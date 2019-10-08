@@ -1,0 +1,60 @@
+@import '../../../assets/scss/vars';
+
+.root {
+  display: flex;
+  border-bottom: 1px solid $darkBorder300;
+  width: 100%;
+
+  .item {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    span {
+      padding-left: 20px;
+      font-family: $fontApp;
+      font-size: 11px;
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.7px;
+      color: $colorGray-350;
+    }
+
+    .icon {
+      position: relative;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 35px;
+      height: 50px;
+      overflow: hidden;
+      color: $colorGray-600;
+      transition: all 0.2s;
+    }
+  }
+
+  &.dark {
+    background: $darkBlack100;
+    .item {
+      .icon {
+        color: $colorGray-350;
+      }
+
+      &.active,
+      &:hover {
+        box-shadow: none;
+        background: $darkBlack200;
+
+        span,
+        .icon {
+          color: $darkBlue300;
+        }
+      }
+    }
+  }
+}

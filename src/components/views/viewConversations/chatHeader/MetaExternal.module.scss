@@ -1,0 +1,38 @@
+@import '../../../../assets/scss/vars';
+
+.root {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+
+  .item {
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      text-transform: uppercase;
+      font-size: 10px;
+      color: $colorGray-400;
+      white-space: nowrap;
+    }
+
+    .content {
+      font-size: 12px;
+      color: $colorGray-300;
+    }
+  }
+
+  &.dark {
+    .item {
+      .title {
+        color: $colorGray-350;
+      }
+
+      .content {
+        color: #fff;
+      }
+    }
+  }
+}

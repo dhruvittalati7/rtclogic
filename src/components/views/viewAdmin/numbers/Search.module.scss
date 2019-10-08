@@ -1,0 +1,26 @@
+@import "../../../../assets/scss/vars";
+
+.root {
+  width: 100%;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 10px;
+
+  .button {
+    cursor: pointer;
+    width: 140px;
+    min-height: 45px;
+    border-radius: 3px;
+    background: $darkGreen300;
+    display: flex;
+    color: #fff;
+    font-size: 13px;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 1.04px;
+    border: none;
+    transition: all 0.2s;
+  }
+}

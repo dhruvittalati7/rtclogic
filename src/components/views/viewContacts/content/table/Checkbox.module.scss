@@ -1,0 +1,54 @@
+@import "../../../../../assets/scss/vars";
+
+.root {
+  & input[type='checkbox'] {
+    opacity: 0;
+  }
+
+  & label {
+    position: relative;
+  }
+
+  & label::before,
+  & label::after {
+    position: absolute;
+    content: '';
+    display: inline-block;
+  }
+
+  & label::before {
+    height: 16px;
+    width: 16px;
+    left: 0;
+    top: 1px;
+    border-radius: 3px;
+    border: 1px solid $darkBlack300;
+  }
+
+  & label::after {
+    height: 4px;
+    width: 8px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(-45deg);
+    left: 4px;
+    top: 6px;
+  }
+
+  & input[type='checkbox']:checked + label::before {
+    background: $darkGreen300;
+    border: 1px solid transparent;
+  }
+
+  & input[type='checkbox'] + label::after {
+    content: none;
+  }
+
+  & input[type='checkbox']:checked + label::after {
+    content: '';
+  }
+
+  //& input[type='checkbox']:focus + label::before {
+  //  outline: rgb(59, 153, 252) auto 5px;
+  //}
+}

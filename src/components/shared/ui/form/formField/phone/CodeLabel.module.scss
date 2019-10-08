@@ -1,0 +1,17 @@
+.root {
+  width: 100%;
+  min-width: 66px;
+  display: flex;
+  align-items: center;
+
+  .code {
+    margin-left: 4px;
+    font-size: 11px;
+  }
+
+  .num {
+    flex: 1 1 auto;
+    width: 100%;
+    text-align: right;
+  }
+}
