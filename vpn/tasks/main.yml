@@ -1,0 +1,27 @@
+---
+- name: Shutdown openvpn if any
+  include_tasks: shutdown_openvpn.yml
+
+- name: Install openvpn
+  apt:
+    name: openvpn 
+    update_cache: True
+    force_apt_get: True
+
+- name: Copy client config
+  copy:
+    src: "{{ config_name }}"
+    dest: /etc/openvpn
+    mode: u+rw,g-rwx,o-rwx
+
+- name: Run openvpn
+  shell: 'nohup timeout -k 60 {{ openvpn_timeout }} openvpn --config ansible_openvpn.ovpn > /tmp/ansiblevpn.log 2>&1 &'
+  args:
+    chdir: "/etc/openvpn/{{ config_name }}"
+  environment:
+    THIS_INSTANSE_HAS_BEEN_RUN_BY: ANSIBLE
+  notify: shutdown openvpn
+
+- name: Pause for a while to allow VPN connection to complete
+  pause:
+    seconds: 5

@@ -1,0 +1,38 @@
+---
+- name: Set sysctl requirements
+  sysctl:
+    name: vm.max_map_count
+    value: "262144"
+    sysctl_set: yes
+    state: present
+
+- name: Create container volume
+  file:
+    path: "{{ container_volume }}/{{ item }}"
+    state: directory
+    owner: '1000'
+    group: '1000'
+    mode: '0755'
+  with_items:
+    - ""
+    - /elasticsearch-backup
+
+- name: "Copy {{ container_name }} config"
+  copy:
+    src: elasticsearch.yml
+    dest: "{{ container_volume }}/elasticsearch.yml"
+    owner: '1000'
+    group: '1000'
+    mode: '600'
+
+- name: "Copy {{ container_name }} docker-compose file"
+  template:
+    src: "{{ container_name }}.j2"
+    dest: "{{ container_yml }}"
+    mode: '0600'
+
+# Restart Elasticsearch
+- name: Restarting Elasticsearch
+ service:
+   name: elasticsearch
+   state: restarted

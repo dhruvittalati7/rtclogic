@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  pbx-core:
+    image: {{ tirade_registry }}/pbx-core:{{ pbx_core_version }}
+    container_name: {{ container_name }}
+    ports:
+      - 3000:3000
+      - 7000:7000
+{% for value in platform.pbx_core.values() %}
+{% if value is defined and value is not none %}
+    environment:
+{% break %}
+{% endif %}
+{% endfor %}
+{% for key, value in platform.pbx_core.items() %}
+{% if value is defined and value is not none %}
+      - {{ key }}={{ value }}
+{% endif %}
+{% endfor %}
+{% if tirade_second_run is defined and tirade_second_run %}
+    command: npm run default
+    restart: always
+{% elif tirade_first_run is defined and tirade_first_run %}
+    command: node tools/dbSync.js -s
+{% else %}
+    command: npm run default
+    restart: always
+{% endif %}

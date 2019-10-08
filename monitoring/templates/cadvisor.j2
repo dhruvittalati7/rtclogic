@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  cadvisor:
+    image: google/cadvisor:{{ cadvisor_version }}
+    container_name: {{ container_name }}
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    command:
+      - --docker_only
+    ports:
+      - 9101:8080
+    networks:
+      - monitoring-network
+    restart: always 
+
+networks:
+  monitoring-network:
+    driver: bridge
+    name: monitoring-network

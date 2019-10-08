@@ -1,0 +1,6 @@
+---
+- name: "Copy {{ container_name }} docker-compose file"
+  template:
+    src: pbx-core.j2
+    dest: "{{ container_yml }}"
+    mode: '0600'

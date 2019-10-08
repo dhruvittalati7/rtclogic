@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  rabbitmq:
+    image: rabbitmq:{{ rabbitmq_version }}
+    container_name: {{ container_name }}
+    hostname: {{ ansible_hostname }}
+    volumes:
+    - {{ container_volume }}:/var/lib/rabbitmq/mnesia
+    ports:
+      - 4369:4369
+      - 5671:5671
+      - 5672:5672
+      - 15672:15672
+      - 25672:25672
+    restart: always
+

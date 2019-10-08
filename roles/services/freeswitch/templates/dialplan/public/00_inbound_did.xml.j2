@@ -1,0 +1,11 @@
+<include>
+  <extension name="inbound">
+    <condition field="destination_number" expression="^\+?\d{6,11}$">
+      <action application="set" data="continue_on_fail=false"/>
+      <action application="set" data="callDirection=inbound"/>
+      <action application="set" data="socket_resume=true"/>
+      <action application="socket" data="{{ platform.pbx_core.NODE_NAME }}:{{ platform.pbx_core.ESL_PORT }} async full"/>
+      <action application="respond" data="500 socket failure"/>
+    </condition>
+  </extension>
+</include>

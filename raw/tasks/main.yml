@@ -1,0 +1,12 @@
+---
+- name: Workaround for file lock issue (1 min sleep) 
+  pause:
+    minutes: 1
+
+- name: Wait until autoupdate is done
+  raw: 'i=0; while `/bin/fuser -s /var/lib/dpkg/lock` && [ $i -lt 180 ]; do ((i++)); sleep 10; done'
+  become: yes
+
+- name: Install python2 on debian-like.
+  raw: 'test -f /etc/debian_version && apt update && apt install -y python-minimal python-simplejson'
+  become: yes

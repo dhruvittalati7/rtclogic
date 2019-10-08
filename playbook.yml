@@ -1,0 +1,258 @@
+---
+
+#########################################
+#                                       #
+#       BASIC SETTINGS                  #
+#                                       #
+#########################################
+
+- hosts: all
+  gather_facts: False
+  become: True
+  vars_files:
+    - vars/users.yml
+    - vars/platforms.yml
+    - vars/vars.yml
+    - roles/common/vars/defaults.yml
+    - roles/common/nginx/vars/main.yml
+
+  pre_tasks:
+  - name: Set facts
+    set_fact:
+      platform: "{{ platforms.get(platform_name) }}"
+    delegate_to: localhost
+
+  roles:
+  - { role: common/hostname }
+  - { role: common/apt }
+
+- hosts: all:!*freeswitch*
+  gather_facts: True
+  become: True
+  vars_files:
+    - vars/users.yml
+    - vars/platforms.yml
+    - vars/vars.yml
+    - roles/common/vars/defaults.yml
+    - roles/common/nginx/vars/main.yml
+
+  roles:
+  - { role: common/docker }
+  - { role: common/docker-compose }
+
+
+#########################################
+#                                       #
+#  ELASTICSEARCH SERVER DEPLOYMENT      #
+#                                       #
+#########################################
+
+- hosts: '*elastic*'
+  become: True
+  vars_files:
+    - vars/users.yml
+    - vars/platforms.yml
+    - vars/vars.yml
+    - roles/common/vars/defaults.yml
+
+  roles:
+  - { role: services/elasticsearch }
+
+
+#########################################
+#                                       #
+#       KIBANA SERVER DEPLOYMENT        #
+#                                       #
+#########################################
+
+- hosts: '*kibana*'
+  become: True
+  vars_files:
+    - vars/users.yml
+    - vars/platforms.yml
+    - vars/vars.yml
+    - roles/common/vars/defaults.yml
+
+  roles:
+  - { role: services/kibana }
+
+
+#########################################
+#                                       #
+#       RMQ SERVER DEPLOYMENT           #
+#                                       #
+#########################################
+
+- hosts: '*rabbitmq*'
+  become: True
+  vars_files:
+    - vars/users.yml
+    - vars/platforms.yml
+    - vars/vars.yml
+    - roles/common/vars/defaults.yml
+
+  roles:
+  - { role: services/rabbitmq }
+  - { role: common/docker-compose, role_action: up }
+
+
+#########################################
+#                                       #
+#       FREESWITCH SERVER DEPLOYMENT    #
+#                                       #
+#########################################
+
+- hosts: '*freeswitch*'
+  become: True
+  vars_files:
+    - vars/users.yml
+    - vars/platforms.yml
+    - vars/vars.yml
+    - roles/common/vars/defaults.yml
+
+  roles:
+  - { role: services/freeswitch }
+
+
+#########################################
+#                                       #
+#       POSTGRES SERVER DEPLOYMENT      #
+#                                       #
+#########################################
+
+- hosts: '*db*'
+  become: True
+  vars_files:
+    - vars/users.yml
+    - vars/platforms.yml
+    - vars/vars.yml
+    - roles/common/vars/defaults.yml
+
+  roles:
+  - { role: services/postgres }
+  - { role: common/docker-compose, role_action: up }
+
+
+#########################################
+#                                       #
+#       REDIS SERVER DEPLOYMENT         #
+#                                       #
+#########################################
+
+- hosts: '*redis*'
+  become: True
+  vars_files:
+    - vars/users.yml
+    - vars/platforms.yml
+    - vars/vars.yml
+    - roles/common/vars/defaults.yml
+
+  roles:
+  - { role: services/redis }
+
+
+#########################################
+#                                       #
+#       CORE SERVER DEPLOYMENT          #
+#                                       #
+#########################################
+
+- hosts: '*core*'
+  become: True
+  vars_files:
+    - vars/users.yml
+    - vars/platforms.yml
+    - vars/vars.yml
+    - roles/common/vars/defaults.yml
+    - roles/common/nginx/vars/main.yml
+
+  roles:
+  - { role: services/pbx-core }
+  - { role: common/nginx, nginx_settings: "{{ platform.nginx_pbx_core }}"}
+  - { role: common/vpn, config_name: client18 }
+  - { role: common/registry_login }
+
+
+#########################################
+#                                       #
+#     FRONTEND SERVER DEPLOYMENT        #
+#                                       #
+#########################################
+
+- hosts: '*front*'
+  become: True
+  vars_files:
+    - vars/users.yml
+    - vars/platforms.yml
+    - vars/vars.yml
+    - roles/common/vars/defaults.yml
+    - roles/common/nginx/vars/main.yml
+
+  roles:
+  - { role: services/tirade2 }
+  - { role: common/nginx, container_name: tirade2, install_not_only_conf: False, nginx_settings: "{{ platform.nginx_tirade2 }}" }
+  - { role: common/vpn, config_name: client18 }
+  - { role: common/registry_login }
+
+
+#########################################
+#                                       #
+#       TURN UP ALL CONTAINERS          #
+#                                       #
+#########################################
+
+- hosts: 'all:!*front*:!*core*:!*freeswitch*'
+  become: True
+
+  roles:
+  - { role: common/docker-compose, role_action: up }
+
+- hosts: '*front*:*core*'
+  become: True
+  remote_user: root
+
+  roles:
+  - { role: common/vpn, config_name: client18 }
+  - { role: common/docker-compose, role_action: up }
+
+
+# Here we start pbx-core container that is initializated on previous step
+# or this step will be skipped if initialization is not needed
+- hosts: '*core*'
+  become: True
+  vars_files:
+    - vars/users.yml
+    - vars/platforms.yml
+    - vars/vars.yml
+    - roles/common/vars/defaults.yml
+
+  roles:
+  - { role: services/pbx-core, tirade_second_run: True, when: tirade_first_run | d(False) }
+  - { role: common/docker-compose, pull: False, role_action: up, when: tirade_first_run | d(False) }
+
+
+#########################################
+#                                       #
+#       BASIC SETTING                   #
+#                                       #
+#########################################
+#
+# It should be at the bottom since you may
+# lost ssh access on first playbook run, if
+# user/ssh roles are executed.
+#
+
+- hosts: all
+  become: True
+  vars_files:
+    - vars/users.yml
+    - vars/platforms.yml
+    - vars/vars.yml
+    - roles/common/vars/defaults.yml
+
+  roles:
+  - { role: common/users }
+  - { role: common/sudo }
+  - { role: common/sshd }
+
+

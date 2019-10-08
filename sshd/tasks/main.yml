@@ -1,0 +1,41 @@
+---
+- name: Set PermitRootLogin no
+  lineinfile:
+    path: "{{ sshd_conf }}" 
+    regexp: '^[\s#]*PermitRootLogin.*$'
+    line: "PermitRootLogin no"
+  notify:
+    - reload sshd  
+
+- name: Set PasswordAuthentication no
+  lineinfile:
+    path: "{{ sshd_conf }}" 
+    regexp: '^[\s#]*PasswordAuthentication.*$'
+    line: "PasswordAuthentication no"
+  notify:
+    - reload sshd  
+
+- name: Set AllowGroups ssh
+  lineinfile:
+    path: "{{ sshd_conf }}" 
+    regexp: '^[\s#]*AllowGroups.*$'
+    line: "AllowGroups users_admins users_ro"
+  notify:
+    - reload sshd 
+
+- name: Set PubkeyAuthentication yes
+  lineinfile:
+    path: "{{ sshd_conf }}" 
+    regexp: '^[\s#]*PubkeyAuthentication.{,6}$'
+    line: "PubkeyAuthentication yes"
+  notify:
+    - reload sshd 
+
+- name: Set AuthorizedKeysFile .ssh/authorized_keys
+  lineinfile:
+    path: "{{ sshd_conf }}" 
+    regexp: '^[\s#]*AuthorizedKeysFile.*$'
+    line: "AuthorizedKeysFile   .ssh/authorized_keys"
+  notify:
+    - reload sshd
+

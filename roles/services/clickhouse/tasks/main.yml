@@ -1,0 +1,13 @@
+---
+- name: Create clickhouse directory
+  file:
+    path: "{{ container_volume }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy clickhouse docker-compose files
+  template:
+    src: "{{ container_name }}.j2"
+    dest: "{{ container_yml }}"
+    mode: '0600'
+

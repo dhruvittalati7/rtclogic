@@ -1,0 +1,108 @@
+---
+- name: Install requirements
+  apt:
+    name:
+      - sqlite3
+      - libpcre3
+      - libspeex1
+      - libspeexdsp1
+      - libsndfile1
+      - liblua5.2-0
+      - libpq5
+    update_cache: True
+    force_apt_get: True
+
+- name: Check if freeswitch is installed
+  shell: 'dpkg -l | grep fs-tirade'
+  register: result
+  changed_when: false
+  failed_when: false
+
+- name: Set fact
+  set_fact:
+    freeswitch_updated: True
+  when: result.rc == 0 and (freeswitch_version == (item.split()[2]))
+  with_items: "{{ result.stdout_lines }}"
+
+- name: Download installation deb
+  get_url:
+    url: "{{ freeswitch_pkg_url }}"
+    dest: /root/freeswitch.deb
+    force: True
+  when: result.rc != 0 or freeswitch_updated | d(False) == False
+
+- name: Install freeswitch
+  apt:
+    deb: /root/freeswitch.deb
+    force_apt_get: True
+  when: result.rc != 0 or freeswitch_updated | d(False) == False
+
+- name: Remove installation deb
+  file:
+    path: /root/freeswitch.deb
+    state: absent
+
+- name: Copy init files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - { 'src': 'freeswitch',
+        'dest': '/etc/init.d/',
+        'mode': '755' }
+    - { 'src': 'freeswitch.service',
+        'dest': '/etc/systemd/system/',
+        'mode': '644' }
+  notify:
+    - reload freeswitch
+
+- name: Copy configs
+  copy:
+    src: conf
+    dest: "{{ freeswitch_path }}"
+  notify:
+    - reload freeswitch
+
+- name: Configure (templated conf files & daemons)
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ freeswitch_path }}/conf/{{ item.dest }}"
+  with_items:
+      - { src: 'autoload_configs/amqp.conf.xml.j2',
+          dest: 'autoload_configs/amqp.conf.xml' }
+      - { src: 'autoload_configs/xml_curl.conf.xml.j2',
+          dest: 'autoload_configs/xml_curl.conf.xml' }
+      - { src: 'dialplan/default/02_plan.xml.j2',
+          dest: 'dialplan/default/02_plan.xml' }
+      - { src: 'dialplan/public/00_inbound_did.xml.j2',
+          dest: 'dialplan/public/00_inbound_did.xml' }
+  notify:
+    - reload freeswitch
+
+- name: Create certs directory
+  file:
+    path: "{{ freeswitch_path }}/certs"
+    state: directory
+
+- name: Copy SSL certs
+  copy:
+    src: ssl/cert.pem
+    dest: "{{ freeswitch_path }}/certs/{{ item }}"
+    mode: '0600'
+  with_items:
+    - wss.pem
+    - dtls-srtp.pem
+  notify:
+    - reload freeswitch
+
+- name: Enable freeswitch service
+  systemd:
+    name: freeswitch
+    daemon_reload: True
+    enabled: yes
+
+- name: Start freeswitch service
+  systemd:
+    name: freeswitch
+    state: started

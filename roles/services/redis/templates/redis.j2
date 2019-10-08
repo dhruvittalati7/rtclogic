@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  redis:
+    image: redis:{{ redis_version }}
+    container_name: {{ container_name }}
+    volumes:
+      - {{ container_volume }}:/data
+    ports:
+      - 6379:{{ platform.pbx_core.REDISPORT }}
+    restart: always

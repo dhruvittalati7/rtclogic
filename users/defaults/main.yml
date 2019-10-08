@@ -1,0 +1,13 @@
+---
+admins_groups:
+  - users_admins
+  - adm
+  - cdrom
+  - sudo
+  - dip
+  - plugdev
+  - lxd
+users_groups:
+  - users_ro
+root_password: '$6$F2NQ/aP12Y6uQe5b$moQ91JsFECyoFiWU6bhBCzG1fbDl1MSX8zK9G8XL7C3VFjjk8NTy4Bkl4pRfqIkv80MjDrNy60l4Lw5CElbmq1'
+

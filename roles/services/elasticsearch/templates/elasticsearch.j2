@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:{{ elasticsearch_version }}
+    container_name: {{ container_name }}
+    volumes:
+      - {{ container_volume }}:/usr/share/elasticsearch/data
+      - {{ container_volume }}/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - {{ platform.pbx_core.ESPORT }}:9200
+      - 9300:9300
+    environment:
+     - discovery.type=single-node
+    restart: always
+

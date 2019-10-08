@@ -1,0 +1,25 @@
+[test]
+core.tirade.io       ansible_host=192.168.122.200
+front.tirade.io      ansible_host=192.168.122.201
+db.tirade.io         ansible_host=192.168.122.202
+redis.tirade.io      ansible_host=192.168.122.203
+elastic.tirade.io    ansible_host=192.168.122.204
+kibana.tirade.io     ansible_host=192.168.122.205
+rabbitmq.tirade.io   ansible_host=192.168.122.206
+freeswitch.tirade.io ansible_host=192.168.122.207
+
+[test:vars]
+platform_name = test
+
+[test-aws]
+core                 ansible_host=3.124.13.144
+front                ansible_host=3.123.186.66
+db                   ansible_host=35.158.93.27
+redis                ansible_host=18.185.26.103
+elastic              ansible_host=18.197.99.53
+kibana               ansible_host=18.197.107.130
+rabbitmq             ansible_host=54.93.121.82
+freeswitch           ansible_host=3.124.22.195
+
+[test-aws:vars]
+platform_name = test-aws

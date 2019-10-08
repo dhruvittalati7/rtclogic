@@ -1,0 +1,4 @@
+---
+- name: init rmq 
+  include_tasks: init_rmq.yml
+

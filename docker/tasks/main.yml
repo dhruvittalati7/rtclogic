@@ -1,0 +1,49 @@
+---
+- name: Set facts
+  set_fact:
+    distro_type_lower: "{{ ansible_distribution_file_variety | lower }}"
+    distro_lower: "{{ ansible_distribution | lower }}"
+    distro_release_lower: "{{ ansible_distribution_release | lower }}"
+
+- name: Install docker requirements
+  apt:
+    name: "{{ vars[ 'docker_' + distro_type_lower + '_requirements' ]}}"
+    update_cache: True
+    force_apt_get: True
+
+- name: Install docker GPG key
+  apt_key:
+    url: "https://download.docker.com/linux/{{ distro_lower }}/gpg"
+    state: present
+
+- name: Add repo
+  apt_repository:
+    repo: "deb [arch=amd64] {{ docker_repo }}{{ distro_lower }} {{ distro_release_lower }} stable" 
+
+- name: Install containerd
+  apt:
+    name: "{{ docker_packets_deps }}"
+    update_cache: True
+    force_apt_get: True
+
+- name: Install docker
+  apt:
+    name: "{{ packages }}" 
+    force_apt_get: True
+  vars:
+    packages:
+    - "docker-ce={{ docker_version }}"
+    - "docker-ce-cli={{ docker_version }}"
+  when: docker_version is defined
+
+- name: Install docker
+  apt:
+    name: "{{ packages }}" 
+    force_apt_get: True
+  vars:
+    packages:
+    - "docker-ce"
+    - "docker-ce-cli"
+  when: docker_version is not defined
+
+

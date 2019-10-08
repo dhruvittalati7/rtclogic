@@ -1,0 +1,3 @@
+---
+container_name: pbx-core 
+pbx_core_version: latest

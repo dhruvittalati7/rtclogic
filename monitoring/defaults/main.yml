@@ -1,0 +1,5 @@
+---
+install_ne: True
+install_cadvisor: True
+ne_version: latest
+cadvisor_version: v0.33.0

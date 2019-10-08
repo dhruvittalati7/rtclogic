@@ -1,0 +1,5 @@
+---
+docker_compose_url_path1: 'https://github.com/docker/compose/releases/download/'
+docker_compose_url_path2: '/docker-compose-Linux-x86_64'
+docker_compose_bin_path: '/usr/local/bin/docker-compose'
+docker_compose_conf_path: '/etc/docker-compose'

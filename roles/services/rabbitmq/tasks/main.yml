@@ -1,0 +1,18 @@
+---
+- name: "Create {{ container_name }} directory"
+  file:
+    path: "{{ container_volume }}"
+    state: directory
+    mode: '0755'
+  notify:
+    - init rmq
+
+- name: "Copy {{ container_name }} docker-compose files"
+  template:
+    src: rabbitmq.j2
+    dest: "{{ container_yml }}"
+    mode: '0600'
+  notify:
+    - init rmq
+
+

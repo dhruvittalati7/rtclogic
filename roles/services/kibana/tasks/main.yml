@@ -1,0 +1,26 @@
+---
+- name: "Copy {{ container_name }} docker-compose files"
+  template:
+    src: kibana.j2
+    dest: "{{ container_yml }}"
+    mode: '0600'
+
+
+# Update kibana config file to only accept local connections
+- name: Updating the config file to restrict outside access
+ lineinfile:
+   destfile: /etc/kibana/kibana.yml
+   regexp: 'server.host:'
+   line: 'server.host: localhost'
+# Enable Kibana service
+- name: Enabling Kibana service
+ systemd:
+   name: kibana
+   enabled: yes
+   daemon_reload: yes
+# Start Kibana service
+- name: Starting Kibana service
+ systemd:
+   name: kibana
+   state: started
+

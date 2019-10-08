@@ -1,0 +1,9 @@
+---
+docker_volumes: /var/local/
+container_volume: "{{ docker_volumes }}{{ container_name }}/"
+docker_compose_conf_path: /etc/docker-compose/
+container_yml: "{{ docker_compose_conf_path }}/{{ container_name }}.yml"
+
+registry_url: registry.rtclogic.com:1443
+datacork_registry: "{{ registry_url }}/datacork"
+tirade_registry: "{{ registry_url }}/tirade"

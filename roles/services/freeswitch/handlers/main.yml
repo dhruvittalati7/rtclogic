@@ -1,0 +1,7 @@
+---
+- name: reload freeswitch
+  systemd:
+    name: freeswitch
+    daemon_reload: True
+    state: reloaded
+

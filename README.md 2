@@ -1,0 +1,54 @@
+# ansible-roles-common
+
+The storage for commonly used roles
+
+Here is a short description of roles and current development progress.
+
+**Bold variables** are required.
+
+role    | features pending  | done, 1-10 | main variables    | description
+--------|-----------|-----------|-------------------|--------------------------------------
+raw     | -         | 8         | -                 | Installs minimal ansible requirements
+docker  | update, version check|4|docker_version    | Install docker
+docker-compose| update, version check| 5| docker_compose_version, role_action:run | Install and run docker compose
+hostname| -         | 10        | -                 | Set hostname
+users   | redo groups, users from inventory, userskeys_local, /bin/false (debian) | 7         | -                 | Manage users
+sshd    | - | 10    | -                 | Change sshd settings
+apt     | update repos | 5      | auto_update_enabled | Set default repos, disable autoupdate
+journald| -         | 10        | journal_size (100M for eg) | Journald settings
+registry_login| -   | 10        | registry_url, registry_login, registry_password| Login into the docker registry
+sudo    | -         | 10        |                   | Set sudo without password for admins
+vpn     | -         | 10        | config_name       | Set up and down VPN needed for registry
+monitoring| -       | 10        | install_(ne\|cadvisor), (ne\|cadvisor)_versions | Monitoring with node-exporter and cadvisor
+
+# How to use / playbook template
+
+1. Add this repo as submodules to your repo `cd roles; git submodule add git@gitlab.rtclogic.com:rtclogic/ansible-roles-common.git common`
+2. Add templates to your playbook.
+
+raw role requires:
+```
+- hosts: all
+  gather_facts: False
+  remote_user: root
+
+  roles:
+  - { role: common/raw }
+```
+
+other roles:
+```
+- hosts: all
+  gather_facts: True
+  become: True
+  remote_user: root
+  vars_files:
+    - vars/users.yml
+    - roles/common/vars/defaults.yml
+
+  roles:
+  - { role: common/<role1> }
+  ...
+  - { role: common/<roleN> }
+
+```

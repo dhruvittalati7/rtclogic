@@ -1,0 +1,23 @@
+---
+- name: Get openvpn pid
+  command: cat /tmp/ansible_vpn.pid
+  register: openvpn_pid
+  ignore_errors: yes
+  changed_when: false
+
+- name: Check pid
+  command:
+    argv:
+      - grep
+      - -q
+      - "THIS_INSTANSE_HAS_BEEN_RUN_BY=ANSIBLE"
+      - "/proc/{{ openvpn_pid.stdout }}/environ"
+  register: env_is_found
+  ignore_errors: yes
+  changed_when: false
+  when: openvpn_pid is defined
+
+- name: Kill openvpn 
+  command: "kill {{ openvpn_pid.stdout }}"
+  when: env_is_found is defined and env_is_found.rc == 0
+

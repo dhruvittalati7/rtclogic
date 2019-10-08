@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  kibana:
+    image: docker.elastic.co/kibana/kibana:{{ kibana_version }}
+    container_name: {{ container_name }}
+    environment:
+      - ELASTICSEARCH_HOSTS=http://{{ platform.pbx_core.ESHOST }}:{{ platform.pbx_core.ESPORT }}
+      - SERVER_NAME=kibana.{{ platform.pbx_core.NODE_DOMAIN }}
+    ports:
+      - 80:5601
+    restart: always
+

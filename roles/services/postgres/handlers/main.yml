@@ -1,0 +1,3 @@
+---
+- name: postgres init
+  include_tasks: postgres_init.yml

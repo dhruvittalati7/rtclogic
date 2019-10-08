@@ -1,0 +1,29 @@
+<include>
+  <extension name="internalOutbound">
+    <condition field="destination_number" expression="^\d{3}$">
+      <action application="set" data="callDirection=internalOutbound"/>
+      <action application="set" data="ringback=$${us-ring}"/>
+      <action application="ring_ready"/>
+      <action application="set" data="socket_resume=true"/>
+      <action application="socket" data="{{ platform.pbx_core.NODE_NAME }}:{{ platform.pbx_core.ESL_PORT }} async full"/>
+      <action application="respond" data="500 socket failure"/>
+    </condition>
+  </extension>
+  <extension name="internalInbound">
+    <condition field="destination_number" expression="^user_\d{3}$">
+      <action application="set" data="callDirection=internalInbound"/>
+      <action application="park"/>
+    </condition>
+  </extension>
+  <extension name="outbound">
+    <condition field="destination_number" expression="^\+?\d{6,11}$">
+      <action application="set" data="continue_on_fail=false"/>
+      <action application="set" data="ringback=$${us-ring}"/>
+      <action application="set" data="callDirection=outbound"/>
+      <action application="ring_ready"/>
+      <action application="set" data="socket_resume=true"/>
+      <action application="socket" data="{{ platform.pbx_core.NODE_NAME }}:{{ platform.pbx_core.ESL_PORT }} async full"/>
+      <action application="respond" data="500 socket failure"/>
+    </condition>
+  </extension>
+</include>

@@ -1,0 +1,84 @@
+---
+- name: Set facts (users_all)
+  set_fact:
+    users_all: "{{ users_admins | union(users_readonly) }}"
+
+- name: Check if all mentioned users have keys
+  fail:
+    msg: "SSH key is absent for {{ item }} user"
+  when: item not in userskeys.keys() 
+  with_items: "{{ users_all }}" 
+
+- name: Get remote users
+  shell: 'cat /etc/passwd | cut -f 1 -d :' 
+  register: users_remote_raw
+
+- name: Set facts (users_remote)
+  set_fact:
+    users_remote: "{{ users_remote_raw.stdout_lines }}"
+
+- name: Set facts (users_remote_known)
+  set_fact:   
+    users_remote_known: "{{ users_remote | intersect(userskeys.keys()) }}"
+
+- name: Set facts (users_to_block)
+  set_fact:
+    users_to_block: "{{ users_remote_known | difference(users_all) }}"
+
+- name: Create user groups
+  group:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ users_groups | union(admins_groups) }}"
+
+- name: Add RO users
+  user:
+    name: "{{ item }}"
+    shell: /bin/bash
+    groups: "{{ users_groups }}"
+    password: '!'
+  with_items: "{{ users_readonly }}"
+
+- name: Add admins users
+  user:
+    name: "{{ item }}"
+    shell: /bin/bash
+    groups: "{{ admins_groups }}"
+    password: '!'
+  with_items: "{{ users_admins }}"
+
+- name: Add authorized_keys
+  authorized_key:
+    user: "{{ item }}"
+    key: "{{ userskeys[item] }}"
+    state: present
+    exclusive: True
+  with_items: "{{ users_all }}"
+
+- name: Block users
+  user:
+    name: "{{ item }}"
+    shell: '/bin/false'
+    groups: ""
+    password: '!'
+    password_lock: True
+    remove: True
+  with_items: "{{ users_to_block }}"
+
+- name: Remove blocked users' keys
+  file:
+    path: "/home/{{ item }}/.ssh/authorized_keys"
+    state: absent 
+  with_items: "{{ users_to_block }}"
+
+- name: Remove root's keys
+  file:
+    path: "/root/.ssh/authorized_keys"
+    state: absent    
+
+- name: Set root password
+  user:
+    name: root 
+    shell: '/bin/bash'
+    password: "{{ root_password }}" 
+

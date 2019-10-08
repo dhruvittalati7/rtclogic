@@ -1,0 +1,6 @@
+---
+container_name: rabbitmq 
+rabbitmq_version: latest
+rabbitmq_vhost: tiradeio
+rabbitmq_user: pbx
+rabbitmq_password: 'g#33Nf9vdd59Al'

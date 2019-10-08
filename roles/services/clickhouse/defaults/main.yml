@@ -1,0 +1,3 @@
+---
+container_name: clickhouse-server
+clickhouse_version: latest

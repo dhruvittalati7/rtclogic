@@ -1,0 +1,11 @@
+---
+docker_debian_requirements:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg2
+  - software-properties-common
+docker_repo: 'https://download.docker.com/linux/'
+docker_packets_deps:
+  - containerd.io
+

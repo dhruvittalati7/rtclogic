@@ -1,0 +1,5 @@
+---
+unattended_update_conf: /etc/apt/apt.conf.d/20auto-upgrades
+unattended_update_enabled: 0
+update_manager_conf: /etc/update-manager/release-upgrades
+update_manager_prompt: never

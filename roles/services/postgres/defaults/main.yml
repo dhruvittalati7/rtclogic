@@ -1,0 +1,4 @@
+---
+container_name: postgres
+postgres_version: "11"
+postgres_password: "AiHa7LouoeF4iegh"

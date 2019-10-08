@@ -1,0 +1,21 @@
+---
+- name: Install requirements, python-pip
+  apt:
+    name:
+      - python3-pip
+      - python-pip
+    state: latest
+    force_apt_get: True
+
+- name: Install requirements, python modules
+  pip:
+    name:
+      - docker
+      - requests>=2.20.1
+
+- name: Login into the docker registry 
+  docker_login:
+    registry: "{{ registry_url }}"
+    username: "{{ registry_login }}"
+    password: "{{ registry_password }}"
+    reauthorize: yes

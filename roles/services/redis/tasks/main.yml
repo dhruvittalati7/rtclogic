@@ -1,0 +1,41 @@
+---
+- name: Set sysctl requirements 1
+  sysctl:
+    name: vm.overcommit_memory
+    value: "1"
+    sysctl_set: yes
+    state: present
+
+- name: Set sysctl requirements 2
+  sysctl:
+    name: net.core.somaxconn
+    value: "1024"
+    sysctl_set: yes
+    state: present
+
+- name: Install sysfs
+  apt:
+    name: sysfsutils
+    update_cache: True
+    force_apt_get: True
+
+- name: Set sysfs requirements
+  lineinfile:
+    path: /etc/sysfs.conf
+    regexp: '^[\s#]*kernel/mm/transparent_hugepage/enabled'
+    line: "kernel/mm/transparent_hugepage/enabled = never"
+  notify:
+  - restart sysfs
+
+- name: "Create {{ container_name }} directory"
+  file:
+    path: "{{ container_volume }}"
+    state: directory
+    mode: '0755'
+
+- name: "Copy {{ container_name }} docker-compose files"
+  template:
+    src: redis.j2
+    dest: "{{ container_yml }}"
+    mode: '0600'
+

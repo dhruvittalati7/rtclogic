@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  node-exporter:
+    image: prom/node-exporter:{{ ne_version }}
+    container_name: {{ container_name }}
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+      - {{ container_volume }}:/var/{{ container_name }}
+    command:
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+      - --collector.filesystem.ignored-mount-points
+      - "^/docker/.*"
+      - --collector.textfile.directory
+      - /var/{{ container_name }}/promfiles
+    ports:
+      - 9100:9100
+    networks:
+      - monitoring-network
+    restart: always
+
+networks:
+  monitoring-network:
+    driver: bridge
+    name: monitoring-network

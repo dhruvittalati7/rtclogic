@@ -1,0 +1,33 @@
+---
+- name: Give RMQ time for start
+  wait_for:
+    timeout: 10
+
+- name: Get RMQ vhosts
+  shell: "docker exec {{ container_name }} rabbitmqctl list_vhosts --quiet"
+  register: result
+  changed_when: false
+  ignore_errors: true
+
+- name: Sleep if RMQ is not run
+  wait_for:
+    timeout: 30
+  when: result.rc != 0
+
+- name: Get RMQ vhosts
+  shell: "docker exec {{ container_name }} rabbitmqctl list_vhosts --quiet"
+  register: result
+  changed_when: false
+
+- name: Set RMQ vhosts
+  shell: "docker exec {{ container_name }} rabbitmqctl add_vhost {{ platform.pbx_core.RMQVHOST }}"
+  when: platform.pbx_core.RMQVHOST not in result.stdout_lines
+
+- name: Create RMQ user
+  shell: "docker exec {{ container_name }} rabbitmqctl add_user {{ platform.pbx_core.RMQUSER }} {{ platform.pbx_core.RMQPASSWORD }} --quiet"
+  when: platform.pbx_core.RMQVHOST not in result.stdout_lines
+
+- name: Set RMQ permissions
+  shell: "docker exec rabbitmq rabbitmqctl set_permissions -p {{ platform.pbx_core.RMQVHOST }} {{ platform.pbx_core.RMQUSER }} \".*\" \".*\" \".*\" --quiet"
+  when: platform.pbx_core.RMQVHOST not in result.stdout_lines
+

@@ -1,0 +1,60 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          freeswitch
+# Required-Start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: freeswitch server
+# Description:       sip server
+### END INIT INFO
+
+
+PIDFILE=/usr/local/freeswitch/run/freeswitch.pid
+
+if [ `/usr/bin/id -u` -ne 0 ]; then
+    echo "You must be 'root'"
+    exit 0;
+fi
+
+do_start () {
+    if [ -e $PIDFILE ]; then
+       PID=`/bin/cat $PIDFILE`
+       if /bin/ps -f $PID &>/dev/null; then
+           echo "Daemon already running with PID:" $PID
+           exit 0;
+       else
+           rm $PIDFILE
+       fi
+    fi
+    if [ -x /usr/local/freeswitch/bin/freeswitch ] ; then
+        echo -n "FreeSWITCH "
+        /usr/local/freeswitch/bin/freeswitch -nc
+    fi
+}
+
+do_stop () {
+    if [ -x /usr/local/freeswitch/bin/freeswitch ] ; then
+        echo -n "FreeSWITCH "
+        /usr/local/freeswitch/bin/freeswitch -stop
+    fi
+}
+
+case "$1" in
+  start|"")
+        do_start
+        ;;
+  restart|reload|force-reload|status)
+        do_stop
+        sleep 30
+        do_start
+        ;;
+  stop)
+        do_stop
+        ;;
+  *)
+        echo "Usage: $0 [start|stop]" >&2
+        exit 3
+        ;;
+esac
+

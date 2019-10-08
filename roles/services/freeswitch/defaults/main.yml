@@ -1,0 +1,5 @@
+---
+freeswitch_version: '0.0.3'
+freeswitch_pkg_url: "https://tirade.s3.eu-central-1.amazonaws.com/fs-tirade-{{ freeswitch_version }}.deb"
+freeswitch_path: /usr/local/freeswitch
+freeswitch_gateway_url: "https://{{ platform.pbx_core.NODE_NAME }}/core/configure/freeswitch/directory/b70e3405-b344-4e64-a0b5-1cc82f65bc1b"

@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres:{{ postgres_version }}
+    container_name: {{ container_name }}
+    volumes:
+      - {{ container_volume }}data:/var/lib/postgresql/data
+      - {{ container_volume }}pbx:/var/lib/postgresql/pbx
+      - {{ container_volume }}postgresql.conf:/etc/postgresql/postgresql.conf
+    environment:
+      - POSTGRES_PASSWORD={{ postgres_password }}
+    ports:
+      - {{ platform.pbx_core.DBPORT }}:5432
+    user: "{{ uid }}:{{ gid }}"
+    command:
+      - -c
+      - config_file=/etc/postgresql/postgresql.conf
+    restart: always
+

@@ -1,0 +1,84 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            b6:13:a1:65:44:ea:1e:d4:98:aa:5d:73:d6:a4:6f:1c
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: CN=ca.rtclogic.com
+        Validity
+            Not Before: Apr 11 06:32:46 2019 GMT
+            Not After : Mar 26 06:32:46 2022 GMT
+        Subject: CN=client18
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:ca:2e:d2:f8:b2:19:19:19:51:4d:5e:38:3d:e8:
+                    69:bd:02:f7:76:ed:d4:d5:2e:17:93:32:fc:a9:13:
+                    c0:95:54:a1:8d:31:96:af:46:ae:d7:4d:89:64:25:
+                    5f:0b:ac:3a:e7:8d:bc:20:e1:23:50:e2:3f:8f:31:
+                    e9:cf:4c:4c:ad:9a:6c:96:ee:75:6c:f2:3f:79:1e:
+                    4d:08:df:0d:6f:06:b1:72:15:16:da:57:ca:54:d3:
+                    44:d4:45:41:11:f7:6c:1e:e9:59:22:e3:08:af:d4:
+                    0a:55:30:54:8f:40:06:9b:36:bd:85:67:f3:8e:0c:
+                    f8:8a:86:c7:6e:71:dd:5f:f4:1f:db:31:49:6f:3b:
+                    f2:93:f3:32:be:5c:bc:e1:a2:61:77:70:b1:6b:be:
+                    56:b3:71:3b:75:6e:23:d1:9d:34:93:fd:56:e8:b5:
+                    17:6e:04:39:f2:55:ed:e5:1c:fe:4a:d8:d6:c3:59:
+                    05:8f:62:0c:9b:ce:76:62:2f:f4:a6:79:47:76:69:
+                    40:f1:f3:bf:79:1e:2c:9d:26:5b:8c:8e:3d:1a:b5:
+                    d1:91:91:5b:7a:be:7d:33:6f:59:9c:38:31:e5:8f:
+                    62:64:04:27:d2:29:0d:7b:1c:5a:88:fe:2d:36:63:
+                    4a:4d:a5:b8:b0:04:c4:e9:af:97:73:f9:e1:3d:92:
+                    e8:07
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Subject Key Identifier: 
+                13:82:50:80:3D:1C:46:6A:BE:9E:82:A3:D7:A0:AD:88:6E:E5:EF:FD
+            X509v3 Authority Key Identifier: 
+                keyid:93:3A:09:F3:90:78:49:70:CB:BB:D8:D9:B2:14:1C:85:4B:31:92:07
+                DirName:/CN=ca.rtclogic.com
+                serial:AC:A0:AA:20:A7:B6:F4:B7
+
+            X509v3 Extended Key Usage: 
+                TLS Web Client Authentication
+            X509v3 Key Usage: 
+                Digital Signature
+    Signature Algorithm: sha256WithRSAEncryption
+         d0:54:65:49:33:e5:1d:db:e4:90:f0:1c:66:91:13:4f:3c:40:
+         a1:8b:52:c9:d4:cb:ba:3d:bd:50:52:72:36:77:95:9c:52:ed:
+         0f:81:53:66:30:c2:33:16:4a:37:d0:70:1b:75:b1:f8:b1:8e:
+         57:ba:7c:fb:65:fb:40:d3:da:08:7b:6d:1b:06:28:c9:65:fe:
+         d9:b2:d0:6d:53:c1:4f:22:ac:bc:8a:9f:d5:3f:75:0e:78:2c:
+         74:6e:e2:a4:f3:84:f5:e6:e9:a4:c0:e4:26:97:d6:0e:0f:73:
+         5b:93:f5:18:4b:e7:1b:89:38:78:37:7e:39:d3:e5:85:b8:1b:
+         53:cd:f8:68:07:9d:47:b1:cb:fa:b6:fe:43:bb:15:75:c8:09:
+         d2:11:02:de:e7:30:01:19:42:bb:07:8d:2b:ba:ba:8e:9e:0a:
+         71:f2:ae:84:e0:5f:44:9f:64:c5:43:3f:30:1d:ab:02:07:c2:
+         06:74:32:96:08:18:ee:c9:29:25:64:a7:f3:21:53:5d:af:a2:
+         02:8b:5e:76:ba:07:fd:8d:00:6c:01:e1:64:97:cd:a3:23:9e:
+         6a:06:26:7a:b2:ef:cb:f5:67:fe:b1:e7:cc:28:8a:99:a3:f6:
+         b9:ec:2b:2f:43:46:15:ef:36:74:43:99:97:ff:60:1a:c6:53:
+         1c:d3:bc:5b
+-----BEGIN CERTIFICATE-----
+MIIDVDCCAjygAwIBAgIRALYToWVE6h7UmKpdc9akbxwwDQYJKoZIhvcNAQELBQAw
+GjEYMBYGA1UEAwwPY2EucnRjbG9naWMuY29tMB4XDTE5MDQxMTA2MzI0NloXDTIy
+MDMyNjA2MzI0NlowEzERMA8GA1UEAwwIY2xpZW50MTgwggEiMA0GCSqGSIb3DQEB
+AQUAA4IBDwAwggEKAoIBAQDKLtL4shkZGVFNXjg96Gm9Avd27dTVLheTMvypE8CV
+VKGNMZavRq7XTYlkJV8LrDrnjbwg4SNQ4j+PMenPTEytmmyW7nVs8j95Hk0I3w1v
+BrFyFRbaV8pU00TURUER92we6Vki4wiv1ApVMFSPQAabNr2FZ/OODPiKhsducd1f
+9B/bMUlvO/KT8zK+XLzhomF3cLFrvlazcTt1biPRnTST/VbotRduBDnyVe3lHP5K
+2NbDWQWPYgybznZiL/SmeUd2aUDx8795HiydJluMjj0atdGRkVt6vn0zb1mcODHl
+j2JkBCfSKQ17HFqI/i02Y0pNpbiwBMTpr5dz+eE9kugHAgMBAAGjgZswgZgwCQYD
+VR0TBAIwADAdBgNVHQ4EFgQUE4JQgD0cRmq+noKj16CtiG7l7/0wSgYDVR0jBEMw
+QYAUkzoJ85B4SXDLu9jZshQchUsxkgehHqQcMBoxGDAWBgNVBAMMD2NhLnJ0Y2xv
+Z2ljLmNvbYIJAKygqiCntvS3MBMGA1UdJQQMMAoGCCsGAQUFBwMCMAsGA1UdDwQE
+AwIHgDANBgkqhkiG9w0BAQsFAAOCAQEA0FRlSTPlHdvkkPAcZpETTzxAoYtSydTL
+uj29UFJyNneVnFLtD4FTZjDCMxZKN9BwG3Wx+LGOV7p8+2X7QNPaCHttGwYoyWX+
+2bLQbVPBTyKsvIqf1T91DngsdG7ipPOE9ebppMDkJpfWDg9zW5P1GEvnG4k4eDd+
+OdPlhbgbU834aAedR7HL+rb+Q7sVdcgJ0hEC3ucwARlCuweNK7q6jp4KcfKuhOBf
+RJ9kxUM/MB2rAgfCBnQylggY7skpJWSn8yFTXa+iAotedroH/Y0AbAHhZJfNoyOe
+agYmerLvy/Vn/rHnzCiKmaP2uewrL0NGFe82dEOZl/9gGsZTHNO8Ww==
+-----END CERTIFICATE-----

@@ -1,0 +1,47 @@
+---
+- name: Create directories
+  file:
+    path: "{{ container_volume }}{{ item }}"
+    state: directory
+    mode: '0755'
+  with_items:
+    - ""
+    - /keys
+    - /conf.d
+
+- name: Copy files
+  copy:
+    src: nginx/
+    dest: "{{ container_volume }}"
+  when: install_not_only_conf | d(True) == True
+
+- name: Copy config
+  template:
+    src: default.j2
+    dest: "{{ container_volume }}/conf.d/default.conf"
+    mode: '0600'
+
+- name: Get key names
+  set_fact:
+    key_files: []
+
+- name: Get key names
+  set_fact:
+    key_files: "{{ key_files | union([item.key + '.key', item.key + '.crt']) }}"
+  when: item.key is defined
+  with_items: "{{ nginx_settings }}"
+
+- name: Copy keys
+  copy:
+    src: "nginx_keys/{{ item }}"
+    dest: "{{ container_volume }}/keys/"
+  with_items: "{{ key_files }}"
+  when: key_files is defined and key_files
+
+- name: Copy docker compose file
+  template:
+    src: "{{ container_name }}.j2"
+    dest: "{{ container_yml }}"
+    mode: '0600'
+  when: install_not_only_conf | d(True) == True
+

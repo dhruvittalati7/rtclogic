@@ -1,0 +1,31 @@
+---
+- name: Get postgres container info
+  docker_container_info:
+    name: "{{ container_name }}"
+  register: result
+  failed_when: result.container.NetworkSettings.Networks.values()[0].IPAddress is not defined
+
+- name: Create table pbx
+  postgresql_db:
+    name: "{{ platform.pbx_core.DBNAME }}"
+    login_host: "{{ result.container.NetworkSettings.Networks.values()[0].IPAddress }}"
+    login_password: "{{ postgres_password }}"
+
+- name: Create pbx user
+  postgresql_user:
+    login_host: "{{ result.container.NetworkSettings.Networks.values()[0].IPAddress }}"
+    login_password: "{{ postgres_password }}"
+    name: "{{ platform.pbx_core.DBNAME }}"
+    db: "{{ platform.pbx_core.DBUSER }}" 
+    priv: ALL 
+    password: "{{ platform.pbx_core.DBPASSWORD }}"
+
+- name: Add extentions
+  postgresql_ext:
+    login_host: "{{ result.container.NetworkSettings.Networks.values()[0].IPAddress }}"
+    login_password: "{{ postgres_password }}"
+    name: "{{ item }}"
+    db: "{{ platform.pbx_core.DBNAME }}"
+  with_items:
+    - uuid-ossp
+    - ltree

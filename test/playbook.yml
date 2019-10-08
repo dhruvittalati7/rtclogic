@@ -1,0 +1,74 @@
+---
+
+- hosts: all
+  gather_facts: False
+
+  tasks:
+  - name: Where am i? 
+    command: /usr/bin/hostname 
+    delegate_to: localhost
+    register: hn
+
+  - name: Recreating VM
+    block:
+      - name: Stop old VM
+        command: virsh destroy ansible-roles-common
+        ignore_errors: yes
+
+      - name: Delete old image
+        file:
+          path: /var/lib/libvirt/images/dev/ansible-roles-common.qcow2
+          state: absent
+
+      - name: Create new image
+        command: qemu-img create -f qcow2 /var/lib/libvirt/images/dev/ansible-roles-common.qcow2 -o backing_file=/var/lib/libvirt/images/backends/ubuntu18.qcow2
+
+      - name: Start VM
+        command: virsh create /var/lib/libvirt/configs/ubuntu_frontend.xml
+
+    delegate_to: localhost
+    become: True
+    when: do_not_recreate is not defined and hn.stdout == 'debian10-dt'
+
+  - name: Wait 300 seconds for port 22 to become open and contain "OpenSSH"
+    wait_for:
+      port: 22
+      host: '{{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}'
+      search_regex: OpenSSH
+      delay: 10
+    connection: local
+    when: do_not_recreate is not defined
+
+- hosts: all
+  gather_facts: False
+  remote_user: root
+
+  roles:
+  - { role: ../raw, when: do_not_recreate is not defined }
+
+#################### 
+# Test begins here #
+####################
+
+- hosts: all
+  gather_facts: True
+  become: True
+  remote_user: root
+  vars_files:
+    - ../vars/defaults.yml
+    - vars/users.yml
+
+  roles:
+  - { role: ../apt }
+  - { role: ../hostname }
+  - { role: ../journald }
+  - { role: ../users }
+  - { role: ../sshd }
+  - { role: ../sudo }
+  - { role: ../docker }
+  - { role: ../docker-compose }
+  - { role: ../monitoring }
+  - { role: ../vpn, config_name: client19 }
+  - { role: ../registry_login }
+  - { role: ../docker-compose, role_action: up }
+

@@ -1,0 +1,31 @@
+---
+- name: Stat unattended-update config
+  stat:
+    path: "{{ unattended_update_conf }}"
+  register: filestats
+
+- name: Create unattended-update config
+  file:
+    path: "{{ unattended_update_conf }}"
+    state: touch
+  when: filestats.stat.exists == False
+
+- name: Change unattended-update settings
+  lineinfile:
+    path: "{{ unattended_update_conf }}"
+    regexp: '^[\s#]*{{ item }}'
+    line: "{{ item }} \"{{ unattended_update_enabled }}\";"
+  with_items:
+    - APT::Periodic::Update-Package-Lists
+    - APT::Periodic::Unattended-Upgrade
+
+- name: Stat update-manager config
+  stat:
+    path: "{{ update_manager_conf }}"
+  register: filestats
+
+- name: Change update-manager settings
+  lineinfile:
+    path: "{{ update_manager_conf }}"
+    regexp: '^Prompt='
+    line: "Prompt={{ update_manager_prompt }}"

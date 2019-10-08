@@ -1,0 +1,51 @@
+#jinja2:line_statement_prefix: '%', trim_blocks: False, lstrip_blocks: True, keep_trailing_newline: True
+{%- for server in nginx_settings -%}
+server {
+	listen		    {{ server.listen }};
+	server_name	    {{ server.server_names | join(" ") }};
+{#- Add return -#}
+	{%- if server.return is defined %}
+	return		    {{ server.return }};
+	{%- endif -%}
+{#- Add server keys -#}
+	{%- if server.key is defined %}
+	ssl_certificate	    keys/{{ server.key }}.crt;
+	ssl_certificate_key keys/{{ server.key }}.key;
+	{%- endif -%}
+{#- Add ssl sessings -#}
+	{%- set list_ = server.get("ssl_settings", "").split("\n") -%}
+	{% for line in list_ %}
+	{{ line -}}
+	{%- endfor -%}
+{#- Add locations -#}
+	{%- for location in server.get("locations", []) %}
+	location {{ location.path }} {
+		{%- if location.proxy_pass is defined %}
+		proxy_pass {{ location.proxy_pass -}};
+		{%- endif -%}
+		{%- if location.root is defined %}
+		root {{ location.root -}};
+		{%- endif -%}
+		{%- if location.rewrite is defined %}
+		rewrite {{ location.rewrite -}};
+		{%- endif -%}
+		{%- if location.try_files is defined %}
+		try_files {{ location.try_files | join(" ") -}};
+		{%- endif -%}
+		{%- if location.headers is defined %}
+			{%- set list_ = location.headers.split("\n") -%}
+			{% for line in list_ %}
+		{{ line -}}
+			{%- endfor -%}
+		{% endif %}
+{#- Basic auth -#}
+		{%- if location.auth_basic_user_file is defined -%}
+	       	auth_basic {{ location.auth_basic }};
+		auth_basic_user_file {{ location.auth_basic_user_file }};
+		{% endif %}
+	}
+	{% endfor -%}
+}
+
+{% endfor -%}
+

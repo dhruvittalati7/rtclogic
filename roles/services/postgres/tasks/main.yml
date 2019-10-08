@@ -1,0 +1,64 @@
+---
+- name: Install requirements, python-pip
+  apt:
+    name:
+      - python-pip
+      - python3-pip
+    state: latest
+    force_apt_get: True
+
+- name: Install requirements, python modules
+  pip:
+    name:
+      - docker
+      - psycopg2-binary
+
+- name: Create postgres user
+  user:
+    name: postgres
+    shell: '/bin/false'
+    password: '!'
+    password_lock: True
+
+- name: "Create {{ container_name }} directories"
+  file:
+    path: "{{ container_volume }}{{ item }}"
+    state: directory
+    owner: postgres
+    group: postgres
+    mode: '0755'
+  with_items:
+    - ""
+    - /data
+    - /pbx
+  notify:
+    - postgres init
+
+- name: "Copy {{ container_name }} config"
+  copy:
+    src: postgresql.conf
+    dest: "{{ container_volume }}/postgresql.conf"
+    owner: postgres 
+    group: postgres   
+    mode: '600'
+  notify:
+    - postgres init
+
+- name: Get postgres uid and gid
+  getent:
+    database: passwd
+    key: postgres 
+
+- name: Set facts uid and gid
+  set_fact:
+    uid: "{{ getent_passwd['postgres'][1] }}"
+    gid: "{{ getent_passwd['postgres'][2] }}"
+
+- name: "Copy {{ container_name }} docker-compose files"
+  template:
+    src: postgres.j2
+    dest: "{{ container_yml }}"
+    mode: '0600'
+  notify:
+    - postgres init
+

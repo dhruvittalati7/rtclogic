@@ -1,0 +1,3 @@
+---
+container_name: elasticsearch
+elasticsearch_version: 7.3.1

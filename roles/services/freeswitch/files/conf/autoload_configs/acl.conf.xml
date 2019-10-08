@@ -1,0 +1,35 @@
+<configuration name="acl.conf" description="Network Lists">
+  <network-lists>
+
+    <list name="lan" default="deny">
+      <node type="allow" cidr="10.0.0.0/8"/>
+    </list>
+
+    <list name="domains" default="deny">
+      <!-- twilio -->
+      <node type="allow" cidr="54.244.51.0/24"/>
+
+      <!-- bandwidth -->
+      <node type="allow" cidr="67.231.0.0/16"/>
+
+      <!-- voxbone -->
+      <node type="allow" cidr="81.201.0.0/16"/>
+      <node type="allow" cidr="185.47.148.0/24"/>
+
+    </list>
+
+    <list name="eventSocket" default="deny">
+      <!-- localhost -->
+      <node type="allow" cidr="127.0.0.1/32"/>
+      <node type="allow" cidr="::1/128"/>
+      <!-- VPN -->
+      <node type="allow" cidr="10.0.0.0/8"/>
+      <!-- AWS -->
+      <node type="allow" cidr="172.31.0.0/16"/>
+    </list>
+
+    <list name="ice" default="allow">
+    </list>
+
+  </network-lists>
+</configuration>

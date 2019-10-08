@@ -1,0 +1,7 @@
+---
+- name: Grant sudo permissons to users_admins group"
+  lineinfile:
+    path: /etc/sudoers
+    regexp: '^[\s#]*%\s*users_admins\s+ALL=\(ALL:ALL\)\s+NOPASSWD:\s+ALL\s*$'
+    line: "%users_admins ALL=(ALL:ALL) NOPASSWD: ALL"
+

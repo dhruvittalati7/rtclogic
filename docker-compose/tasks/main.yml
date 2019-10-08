@@ -1,0 +1,59 @@
+---
+- name: Check if already installed
+  stat:
+    path: "{{ docker_compose_bin_path }}"
+  register: stat_result
+
+- name: Check current docker-compose version
+  command: docker-compose --version
+  register: docker_compose_current_version
+  changed_when: false
+  failed_when: false
+  when: stat_result.stat.exists == True
+
+- name: Install docker-compose
+  get_url:
+    url: "{{ docker_compose_url_path1 }}{{ docker_compose_version }}{{ docker_compose_url_path2 }}"
+    dest: "{{ docker_compose_bin_path }}"
+    force: True
+    mode: 750
+  when: >
+    stat_result.stat.exists == False
+    or
+    (docker_compose_current_version.stdout is defined
+    and docker_compose_version not in docker_compose_current_version.stdout)
+
+- name: Create /etc/docker-compose
+  file:
+    path: "{{ docker_compose_conf_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Find docker compose files
+  find:
+    paths: "{{ docker_compose_conf_path }}"
+    file_type: file
+    patterns: '*.yml,*.yaml'
+  register: ymlfiles
+  when: role_action in ['up', 'pull']
+
+- name: Set facts
+  set_fact:
+    filelist: []
+
+- name: Set facts
+  set_fact:
+    filelist: "{{ filelist + [item.path] }}"
+  with_items: "{{ ymlfiles.files }}"
+  when: role_action in ['up', 'pull']
+
+- name: Docker compose pull
+  command: docker-compose -f "{{ item }}" pull
+  with_items: "{{ filelist }}"
+  when: role_action in ['up', 'pull'] and (pull | d(True)) == True
+
+- name: Docker compose up
+  command: docker-compose -f "{{ item }}" up -d
+  with_items: "{{ filelist }}"
+  when: role_action == 'up'
+

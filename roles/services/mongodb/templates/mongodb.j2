@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  mongodb:
+    image: mongo:{{ mongodb_version }}
+    container_name: {{ container_name }}
+    volumes:
+      - {{ container_volume }}:/data/db/
+    ports:
+      - 27017:27017
+    restart: always
+
