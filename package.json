@@ -42,7 +42,7 @@
     "immer": "^3.1.2",
     "libphonenumber-js": "^1.7.18",
     "memoize-one": "^5.0.4",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "pluralize": "^8.0.0",
     "rc-slider": "^8.6.13",
     "react": "^16.8.6",
